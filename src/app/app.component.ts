@@ -4,39 +4,38 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { IntroPage } from '../pages/intro/intro';
+import { ConfigProvider } from '../providers/config/config';
+import { HomePage } from '../pages/home/home';
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [
+    ConfigProvider
+  ]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = IntroPage;
+  rootPage: any;
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-    this.initializeApp();
-
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, configProvider: ConfigProvider) {
     // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Intro', component: IntroPage }
-    ];
 
-  }
-
-  initializeApp() {
+    let config = configProvider.isIntroOn();
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+
+      if (config == null) {
+        this.rootPage = IntroPage;
+        configProvider.setIntroOff();
+      } else {
+        this.rootPage = HomePage;
+      }
+      
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-  }
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
   }
 }
