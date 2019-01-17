@@ -17,7 +17,6 @@ export class ConfigProvider {
     return localStorage.getItem("intro");
   }
 
-  // Grava os dados do localstorage
   setIntroOff() {
     let config = {
       intro: false

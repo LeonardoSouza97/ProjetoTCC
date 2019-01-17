@@ -10,13 +10,18 @@ import { IntroPage } from '../pages/intro/intro';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ConfigProvider } from '../providers/config/config';
+import { LoginPage } from '../pages/login/login';
+import { CadastroUsuarioPage } from '../pages/cadastro-usuario/cadastro-usuario';
+
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    IntroPage
+    IntroPage,
+    LoginPage,
+    CadastroUsuarioPage
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,9 @@ import { ConfigProvider } from '../providers/config/config';
     MyApp,
     HomePage,
     ListPage,
-    IntroPage
+    IntroPage,
+    LoginPage,
+    CadastroUsuarioPage
   ],
   providers: [
     StatusBar,

@@ -1,0 +1,19 @@
+page-login {
+    .btn{
+        height: 50px; 
+        width: 100px; 
+        background-color: white;
+        color: purple;
+        border: 2px solid #4CAF50; 
+    }
+
+    a.novo {
+       float: left;
+       color: green;
+    }
+
+    a.recuperar {
+        float: right;
+        color: purple;
+    }
+}
