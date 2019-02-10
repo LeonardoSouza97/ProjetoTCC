@@ -13,21 +13,24 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-item>
-    <ion-label stacked>Usuário:</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
-  <br>
-  <ion-item>
-    <ion-label stacked>Senha:</ion-label>
-    <ion-input type="password"></ion-input>
-  </ion-item>
-  <br>
-  <a class="novo" (click)="goToCadastroUsuario()">Sou novo aqui</a> <a class="recuperar" (click)="goToRecuperarSenha()">Esqueceu a senha?</a>
-  <br>
-  <br>
-  <br>
-  <div style="text-align: center;">
-  <button class="btn">Entrar</button>
-  </div> 
+  <form [formGroup]="form">
+    <ion-item>
+      <ion-label stacked>Usuário:</ion-label>
+      <ion-input type="text" formControlName="id"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-label stacked>Senha:</ion-label>
+      <ion-input type="password" formControlName="senha"></ion-input>
+    </ion-item>
+    <br>
+    <a class="novo" (click)="goToCadastroUsuario()">Sou novo aqui</a> <a class="recuperar">Esqueceu
+      a senha?</a>
+    <br>
+    <br>
+    <br>
+    <div style="text-align: center;">
+      <button class="btn" (click)="EfetivarLogIn()">Entrar</button>
+    </div>
+  </form>
 </ion-content>

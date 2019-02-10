@@ -14,17 +14,102 @@
 
 
 <ion-content padding>
-  <ion-item>
-    <ion-label stacked>Usuário:</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
-  <br>
-  <ion-item>
+  <form [formGroup]="form">
+
+    <ion-label stacked>Nome:</ion-label>
+    <ion-input type="text" formControlName="nome" maxlength="150"></ion-input>
+    <ion-item *ngIf="!form.controls.nome.valid && (form.controls.nome.dirty || form.controls.nome.touched)" color="danger">
+      <div [hidden]="!form.controls.nome.errors.required">
+        O campo é obrigatório
+      </div>
+    </ion-item>
+
+    <ion-label stacked>Id:</ion-label>
+    <ion-input type="text" formControlName="id" minlength="6" maxlength="12"></ion-input>
+    <ion-item *ngIf="!form.controls.id.valid && (form.controls.id.dirty || form.controls.id.touched)" color="danger">
+      <div [hidden]="!form.controls.id.errors.required">
+        O campo é obrigatório
+      </div>
+      <div [hidden]="!form.controls.id.errors.minlength">
+        Identificação curta demais
+      </div>
+    </ion-item>
+
+    <ion-label stacked>E-Mail:</ion-label>
+    <ion-input type="email" formControlName="email" maxlength="150"></ion-input>
+    <ion-item *ngIf="!form.controls.email.valid && (form.controls.email.dirty || form.controls.email.touched)" color="danger">
+      <div [hidden]="!form.controls.email.errors.required">
+        O campo é obrigatório
+      </div>
+    </ion-item>
+
+    <ion-label stacked>N° do Telefone Celular:</ion-label>
+    <input-mask mask="(___)_____.____" formControlName="fone" minlength="11" allowedChars="0-9" maskCharacter="_"></input-mask>
+    <ion-item *ngIf="!form.controls.fone.valid && (form.controls.fone.dirty || form.controls.fone.touched)" color="danger">
+      <div [hidden]="!form.controls.fone.errors.required">
+        O campo é obrigatório
+      </div>
+      <div [hidden]="!form.controls.fone.errors.minlength">
+        Telefone curta demais
+      </div>
+    </ion-item>
+
+    <ion-label stacked>C.P.F.:</ion-label>
+    <input-mask mask="000.000.000-00" formControlName="cpf" minlength="11" allowedChars="0-9" maskCharacter="0"></input-mask>
+    <ion-item *ngIf="!form.controls.cpf.valid && (form.controls.cpf.dirty || form.controls.cpf.touched)" color="danger">
+      <div [hidden]="!form.controls.cpf.errors.required">
+        O campo é obrigatório
+      </div>
+      <div [hidden]="!form.controls.cpf.errors.minlength">
+        CPF curto demais
+      </div>
+    </ion-item>
+
+    <ion-label stacked>Data de Nascimento:</ion-label>
+    <ion-item>
+      <ion-datetime displayFormat="DD/MM/YYYY" formControlName="nasc" pickerFormat="DD MM YYYY"></ion-datetime>
+    </ion-item>
+
+    <ion-label>Sexo: </ion-label>
+    <ion-list radio-group>
+      <ion-item>
+        <ion-label>Masculino</ion-label>
+        <ion-radio value="Masculino"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Feminino</ion-label>
+        <ion-radio value="Feminino"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Helicóptero de combate</ion-label>
+        <ion-radio value="Helicóptero de combate" checked="true"></ion-radio>
+      </ion-item>
+    </ion-list>
+
     <ion-label stacked>Senha:</ion-label>
-    <ion-input type="password" ></ion-input>
-  </ion-item>
-  <br>
-  <div style="text-align: center;">
-    <button class="btn" type="submit">Gravar</button>
-  </div>
+    <ion-input type="password" formControlName="senha" minlength="6" maxlength="12"></ion-input>
+    <ion-item *ngIf="!form.controls.senha.valid && (form.controls.senha.dirty || form.controls.senha.touched)" color="danger">
+      <div [hidden]="!form.controls.senha.errors.required">
+        O campo é obrigatório
+      </div>
+      <div [hidden]="!form.controls.senha.errors.minlength">
+        Senha curta demais
+      </div>
+    </ion-item>
+
+    <ion-label stacked>Confirmar senha:</ion-label>
+    <ion-input type="password" formControlName="senhaConf" minlength="6" maxlength="12"></ion-input>
+    <ion-item *ngIf="!form.controls.senhaConf.valid && (form.controls.senhaConf.dirty || form.controls.senhaConf.touched)" color="danger">
+      <div [hidden]="!form.controls.senhaConf.errors.required">
+        O campo é obrigatório
+      </div>
+      <div [hidden]="!form.controls.senhaConf.errors.minlength">
+        Senha curta demais
+      </div>
+    </ion-item>
+
+    <div padding style="text-align: center;">
+      <button ion-button class="btn" type="submit" [disabled]="!form.valid" (click)="onSubmit()">Salvar</button>
+    </div>
+  </form>
 </ion-content>

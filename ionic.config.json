@@ -1,5 +1,8 @@
 {
   "name": "ProjetoTCC",
-  "integrations": {},
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
   "type": "ionic-angular"
 }

@@ -7,7 +7,6 @@ import { IntroPage } from '../pages/intro/intro';
 import { ConfigProvider } from '../providers/config/config';
 import { LoginPage } from '../pages/login/login';
 
-
 @Component({
   templateUrl: 'app.html',
   providers: [
