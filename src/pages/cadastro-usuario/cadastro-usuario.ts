@@ -49,7 +49,6 @@ export class CadastroUsuarioPage {
     console.log('ionViewDidLoad CadastroUsuarioPage');
   }
 
-  //  this.usuario = await this.provider.get(this.form.controls.id.value);
   async onSubmit() {
 
     if (this.form.valid) {
@@ -57,10 +56,6 @@ export class CadastroUsuarioPage {
         this.toast.create({ message: 'Senhas não batem!', duration: 3000 }).present();
         return;
       }
-
-     /* this.cript.encrypt(this.form.controls.senha.value).then((value) => {
-        this.senha = value;
-      });*/
 
       this.aes256.encrypt(this.provider.secureKey, this.provider.secureIV, this.form.controls.senha.value)
       .then(res => this.senha = res)

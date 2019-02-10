@@ -4,11 +4,9 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-
 import { MyApp } from './app.component';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { IntroPage } from '../pages/intro/intro';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -18,12 +16,11 @@ import { CadastroUsuarioPage } from '../pages/cadastro-usuario/cadastro-usuario'
 
 import { UsuarioProvider } from '../providers/usuario/usuario';
 import { AES256 } from '@ionic-native/aes-256';
- 
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
     IntroPage,
     LoginPage,
     CadastroUsuarioPage,
@@ -46,19 +43,18 @@ import { AES256 } from '@ionic-native/aes-256';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
     IntroPage,
     LoginPage,
     CadastroUsuarioPage,
   ],
   providers: [
+    AES256,
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
     ConfigProvider,
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
     UsuarioProvider,
-    AES256
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+
   ]
 })
 export class AppModule { }
