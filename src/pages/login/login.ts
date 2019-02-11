@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular'
-import { CadastroUsuarioPage } from '../cadastro-usuario/cadastro-usuario';
+import { HomePage } from '../home/home';
+import { TabsPage } from '../tabs/tabs';
+import { AES256 } from '@ionic-native/aes-256';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { HomePage } from '../home/home';
-import { AES256 } from '@ionic-native/aes-256';
-
+import { CadastroUsuarioPage } from '../cadastro-usuario/cadastro-usuario';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular'
 
 /**
  * Generated class for the LoginPage page.
@@ -24,7 +24,8 @@ export class LoginPage {
   private usuario: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController,
-    private provider: UsuarioProvider, private aes256: AES256, private formBuilder: FormBuilder) {
+    private provider: UsuarioProvider, private aes256: AES256, private formBuilder: FormBuilder,
+    private loadingCtrl: LoadingController) {
 
     this.usuario = this.navParams.data.contact || {};
     this.createForm();
@@ -51,8 +52,15 @@ export class LoginPage {
   }
 
   async EfetivarLogIn() {
+    const loading = this.loadingCtrl.create({
+      spinner: 'dots',
+      content: 'Carregando...'
+    });
+
+    loading.present();
 
     if (this.form.controls.senha.value == null || this.form.controls.id.value == null) {
+      loading.dismiss();
       this.toast.create({ message: 'Um ou mais campos necessários vazios!', duration: 3000 }).present();
       return;
     }
@@ -64,17 +72,21 @@ export class LoginPage {
       this.aes256.decrypt(this.provider.secureKey, this.provider.secureIV, String(user.senha).replace("/n", ""))
         .then(res => {
           if (user != undefined && res == this.form.controls.senha.value) {
-            this.navCtrl.push(HomePage);
+            loading.dismiss();
+            this.navCtrl.push(TabsPage);
           }
           else {
+            loading.dismiss();
             this.toast.create({ message: 'Login e/ou Senha errado(s)!', duration: 3000 }).present();
             this.form.controls.id.setValue("");
             this.form.controls.senha.setValue("");
             this.usuario = undefined;
           }
         })
-        .catch((error: any) => this.toast.create(
-          { message: 'Login e/ou Senha errado(s)!', duration: 3000 }).present()
+        .catch((error: any) => {
+          loading.dismiss();
+          this.toast.create({ message: 'Login e/ou Senha errado(s)!', duration: 3000 }).present()
+        }
         );
 
     });

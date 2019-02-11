@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
+import { AES256 } from '@ionic-native/aes-256';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
-import { AES256 } from '@ionic-native/aes-256';
+import { IonicPage, NavController, NavParams, ToastController, AlertController, LoadingController } from 'ionic-angular';
 
 /**
  * Generated class for the CadastroUsuarioPage page.
@@ -22,9 +22,9 @@ export class CadastroUsuarioPage {
   private usuario: any;
   private senha: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertController: AlertController, 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertController: AlertController,
     private formBuilder: FormBuilder, private toast: ToastController, private provider: UsuarioProvider,
-    private aes256: AES256
+    private aes256: AES256, private loadingCtrl: LoadingController
   ) {
 
     this.usuario = this.navParams.data.contact || {};
@@ -50,35 +50,46 @@ export class CadastroUsuarioPage {
   }
 
   async onSubmit() {
+    const loading = this.loadingCtrl.create({
+      spinner: 'dots',
+      content: 'Carregando...'
+    });
+
+    loading.present();
 
     if (this.form.valid) {
       if (this.form.controls.senha.value != this.form.controls.senhaConf.value) {
         this.toast.create({ message: 'Senhas não batem!', duration: 3000 }).present();
+        loading.dismiss();
         return;
       }
 
       this.aes256.encrypt(this.provider.secureKey, this.provider.secureIV, this.form.controls.senha.value)
-      .then(res => this.senha = res)
-      .catch((error: any) => {
-        this.toast.create({ message: 'Houve um erro ao cadastrar o usuário!.', duration: 3000 }).present();
-        return;
-      });
-    
+        .then(res => this.senha = res)
+        .catch((error: any) => {
+          this.toast.create({ message: 'Houve um erro ao cadastrar o usuário!.', duration: 3000 }).present();
+          loading.dismiss();
+          return;
+        });
+
       var obsv = this.provider.get(this.form.controls.id.value).subscribe((data) => {
         if (data.key != null) {
           this.toast.create({ message: 'Id já cadastrada!\nEscolha outra id.', duration: 3000 }).present();
+          loading.dismiss();
           return;
         }
         else {
           obsv.unsubscribe();
           this.provider.save(this.form.value, false, this.senha)
             .then(() => {
+              loading.dismiss();
               this.toast.create({ message: 'Usuário cadastrado com sucesso.', duration: 3000 }).present();
               this.navCtrl.pop();
             })
             .catch((e) => {
+              loading.dismiss();
               this.toast.create({ message: 'Erro ao cadastrar o usuário.', duration: 3000 }).present();
-              this.toast.create({ message: e.message, duration: 3000 }).present();
+              //  this.toast.create({ message: e.message, duration: 3000 }).present();
               console.error(e);
             });
         }
