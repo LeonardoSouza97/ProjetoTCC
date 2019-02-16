@@ -38,6 +38,7 @@ export class CadastroUsuarioPage {
       nome: [this.usuario.nome, Validators.required],
       cpf: [this.usuario.cpf, Validators.required],
       nasc: [this.usuario.nasc, Validators.required],
+      sexo: [this.usuario.sexo, Validators.required],
       email: [this.usuario.email, Validators.required],
       fone: [this.usuario.fone, Validators.required],
       senha: [this.usuario.senha, Validators.required],

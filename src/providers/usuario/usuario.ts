@@ -37,6 +37,7 @@ export class UsuarioProvider {
           nome: usuarios.nome,
           cpf: usuarios.cpf,
           nasc: usuarios.nasc,
+          sexo: usuarios.sexo,
           email: usuarios.email,
           fone: usuarios.fone,
           senha: senha,

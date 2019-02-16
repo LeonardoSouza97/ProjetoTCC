@@ -5,11 +5,6 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Cadastro de Usuário</ion-title>
-  </ion-navbar>
-
 </ion-header>
 
 
@@ -71,7 +66,7 @@
     </ion-item>
 
     <ion-label>Sexo: </ion-label>
-    <ion-list radio-group>
+    <ion-list radio-group formControlName="sexo">
       <ion-item>
         <ion-label>Masculino</ion-label>
         <ion-radio value="Masculino"></ion-radio>
@@ -81,8 +76,8 @@
         <ion-radio value="Feminino"></ion-radio>
       </ion-item>
       <ion-item>
-        <ion-label>Helicóptero de combate</ion-label>
-        <ion-radio value="Helicóptero de combate" checked="true"></ion-radio>
+        <ion-label>Outro</ion-label>
+        <ion-radio value="Outro" checked="true"></ion-radio>
       </ion-item>
     </ion-list>
 
