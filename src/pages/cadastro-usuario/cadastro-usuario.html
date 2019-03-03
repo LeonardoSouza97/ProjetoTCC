@@ -13,7 +13,8 @@
 
     <ion-label stacked>Nome:</ion-label>
     <ion-input type="text" formControlName="nome" maxlength="150"></ion-input>
-    <ion-item *ngIf="!form.controls.nome.valid && (form.controls.nome.dirty || form.controls.nome.touched)" color="danger">
+    <ion-item *ngIf="!form.controls.nome.valid && (form.controls.nome.dirty || form.controls.nome.touched)"
+      color="danger">
       <div [hidden]="!form.controls.nome.errors.required">
         O campo é obrigatório
       </div>
@@ -32,15 +33,18 @@
 
     <ion-label stacked>E-Mail:</ion-label>
     <ion-input type="email" formControlName="email" maxlength="150"></ion-input>
-    <ion-item *ngIf="!form.controls.email.valid && (form.controls.email.dirty || form.controls.email.touched)" color="danger">
+    <ion-item *ngIf="!form.controls.email.valid && (form.controls.email.dirty || form.controls.email.touched)"
+      color="danger">
       <div [hidden]="!form.controls.email.errors.required">
         O campo é obrigatório
       </div>
     </ion-item>
 
     <ion-label stacked>N° do Telefone Celular:</ion-label>
-    <input-mask mask="(___)_____.____" formControlName="fone" minlength="11" allowedChars="0-9" maskCharacter="_"></input-mask>
-    <ion-item *ngIf="!form.controls.fone.valid && (form.controls.fone.dirty || form.controls.fone.touched)" color="danger">
+    <input-mask mask="(___)_____.____" formControlName="fone" minlength="11" allowedChars="0-9" maskCharacter="_">
+    </input-mask>
+    <ion-item *ngIf="!form.controls.fone.valid && (form.controls.fone.dirty || form.controls.fone.touched)"
+      color="danger">
       <div [hidden]="!form.controls.fone.errors.required">
         O campo é obrigatório
       </div>
@@ -50,7 +54,8 @@
     </ion-item>
 
     <ion-label stacked>C.P.F.:</ion-label>
-    <input-mask mask="000.000.000-00" formControlName="cpf" minlength="11" allowedChars="0-9" maskCharacter="0"></input-mask>
+    <input-mask mask="000.000.000-00" formControlName="cpf" minlength="11" allowedChars="0-9" maskCharacter="0">
+    </input-mask>
     <ion-item *ngIf="!form.controls.cpf.valid && (form.controls.cpf.dirty || form.controls.cpf.touched)" color="danger">
       <div [hidden]="!form.controls.cpf.errors.required">
         O campo é obrigatório
@@ -81,9 +86,23 @@
       </ion-item>
     </ion-list>
 
+    <ion-label>CEP: </ion-label>
+    <ion-input type="number" formControlName="cep" (blur)="verificarCEP()" minlength="8" maxlength="8"> </ion-input>
+    <ion-item *ngIf="(!form.controls.cep.valid || !valCEP) && (form.controls.cep.dirty || form.controls.cep.touched)" color="danger">
+      <div>
+        CEP inválido!
+      </div>
+    </ion-item>
+    <ion-item *ngIf="valCEP">
+      <p>Bairro: {{this.cep.bairro}} <br>
+      Cidade: {{this.cep.localidade}} &nbsp; UF: {{this.cep.uf}}</p>
+    </ion-item>
+
+
     <ion-label stacked>Senha:</ion-label>
     <ion-input type="password" formControlName="senha" minlength="6" maxlength="12"></ion-input>
-    <ion-item *ngIf="!form.controls.senha.valid && (form.controls.senha.dirty || form.controls.senha.touched)" color="danger">
+    <ion-item *ngIf="!form.controls.senha.valid && (form.controls.senha.dirty || form.controls.senha.touched)"
+      color="danger">
       <div [hidden]="!form.controls.senha.errors.required">
         O campo é obrigatório
       </div>
@@ -94,7 +113,9 @@
 
     <ion-label stacked>Confirmar senha:</ion-label>
     <ion-input type="password" formControlName="senhaConf" minlength="6" maxlength="12"></ion-input>
-    <ion-item *ngIf="!form.controls.senhaConf.valid && (form.controls.senhaConf.dirty || form.controls.senhaConf.touched)" color="danger">
+    <ion-item
+      *ngIf="!form.controls.senhaConf.valid && (form.controls.senhaConf.dirty || form.controls.senhaConf.touched)"
+      color="danger">
       <div [hidden]="!form.controls.senhaConf.errors.required">
         O campo é obrigatório
       </div>

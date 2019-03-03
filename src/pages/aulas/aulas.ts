@@ -19,7 +19,6 @@ export class AulasPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AulasPage');
   }
 
 }

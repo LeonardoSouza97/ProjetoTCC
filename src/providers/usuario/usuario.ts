@@ -40,6 +40,10 @@ export class UsuarioProvider {
           sexo: usuarios.sexo,
           email: usuarios.email,
           fone: usuarios.fone,
+          cep: usuarios.cep,
+          tolkens: 10, 
+          qtdAval: 0,
+          aval: 0, 
           senha: senha,
           ativo: state,
         })
@@ -65,4 +69,15 @@ export class UsuarioProvider {
     return this.db.list(this.PATH).remove(key);
   }
 
+  cadAulaUsuario(aula: any, userId: string) {
+    return new Promise((resolve, reject) => {
+      this.db.list("/aulas/" + aula.controls.materia.value + "/")
+        .update(userId, {
+          foco: aula.controls.foco.value,
+          obs: aula.controls.obs.value,    
+        })
+        .then(() => resolve())
+        .catch((e) => reject(e));
+    })
+  }
 }

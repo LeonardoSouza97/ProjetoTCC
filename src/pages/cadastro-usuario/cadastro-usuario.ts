@@ -1,3 +1,5 @@
+import { HttpClient } from '@angular/common/http';
+
 import { Component } from '@angular/core';
 import { AES256 } from '@ionic-native/aes-256';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -21,12 +23,15 @@ export class CadastroUsuarioPage {
   private form: FormGroup;
   private usuario: any;
   private senha: any;
+  private cep: any;
+  private valCEP: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertController: AlertController,
     private formBuilder: FormBuilder, private toast: ToastController, private provider: UsuarioProvider,
-    private aes256: AES256, private loadingCtrl: LoadingController
+    private aes256: AES256, private loadingCtrl: LoadingController, public http: HttpClient
   ) {
 
+    this.valCEP = false;
     this.usuario = this.navParams.data.contact || {};
     this.createForm();
   }
@@ -43,12 +48,44 @@ export class CadastroUsuarioPage {
       fone: [this.usuario.fone, Validators.required],
       senha: [this.usuario.senha, Validators.required],
       senhaConf: [this.usuario.senhaConf, Validators.required],
+      cep: [this.usuario.cep, Validators.required],
     });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CadastroUsuarioPage');
   }
+
+  verificarCEP() {
+    const loading = this.loadingCtrl.create({
+      spinner: 'dots',
+      content: 'Carregando...'
+    });
+
+    loading.present();
+
+    if (String(this.form.controls.cep.value).replace("-", "").length != 8) {
+      loading.dismiss();
+      this.valCEP = false;
+      this.cep = undefined;
+      return;
+    }
+
+    this.http.get('http://viacep.com.br/ws/' + String(this.form.controls.cep.value).replace("-", "") + '/json/').map(res => res).subscribe(data => {
+      var cep: any;
+      cep = data;
+
+      if (data != undefined && cep.erro != true) {
+        this.valCEP = true;
+        this.cep = data;
+        loading.dismiss();
+      } else {
+        this.valCEP = false;
+        loading.dismiss();
+      }
+    });
+  }
+
 
   async onSubmit() {
     const loading = this.loadingCtrl.create({
@@ -57,6 +94,12 @@ export class CadastroUsuarioPage {
     });
 
     loading.present();
+
+    if (!this.valCEP) {
+      this.toast.create({ message: 'CEP Inválido!', duration: 3000 }).present();
+      loading.dismiss();
+      return;
+    }
 
     if (this.form.valid) {
       if (this.form.controls.senha.value != this.form.controls.senhaConf.value) {

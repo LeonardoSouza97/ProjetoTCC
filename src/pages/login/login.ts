@@ -1,11 +1,13 @@
+import { Usuarios } from '../../models/Usuarios';
+
 import { Component } from '@angular/core';
-import { HomePage } from '../home/home';
 import { TabsPage } from '../tabs/tabs';
 import { AES256 } from '@ionic-native/aes-256';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { CadastroUsuarioPage } from '../cadastro-usuario/cadastro-usuario';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular'
+import { Console } from '@angular/core/src/console';
 
 /**
  * Generated class for the LoginPage page.
@@ -25,10 +27,11 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController,
     private provider: UsuarioProvider, private aes256: AES256, private formBuilder: FormBuilder,
-    private loadingCtrl: LoadingController) {
+    private currentUser: Usuarios, private loadingCtrl: LoadingController) {
 
     this.usuario = this.navParams.data.contact || {};
     this.createForm();
+
   }
 
   createForm() {
@@ -40,7 +43,6 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
   }
 
   goToRecuperarSenha() {
@@ -68,8 +70,10 @@ export class LoginPage {
     this.provider.get(this.form.controls.id.value).subscribe(async (data) => {
       var user: any;
       user = data;
+      user.id = data.key;
+      this.currentUser.setCurrent(user);
 
-      this.aes256.decrypt(this.provider.secureKey, this.provider.secureIV, String(user.senha).replace("/n", ""))
+      this.aes256.decrypt(this.provider.secureKey, this.provider.secureIV, String(this.currentUser.senha).replace("/n", ""))
         .then(res => {
           if (user != undefined && res == this.form.controls.senha.value) {
             loading.dismiss();

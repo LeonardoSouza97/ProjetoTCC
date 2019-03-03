@@ -1,0 +1,67 @@
+<!--
+  Generated template for the AdicaoAulaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+</ion-header>
+
+
+<ion-content padding>
+
+  <form [formGroup]="form">
+    <ion-list>
+      <ion-item>
+        <ion-label>Matéria</ion-label>
+        <ion-select formControlName="materia" multiple="false" cancelText="Cancelar" okText="Ok">
+          <ion-option value="Biologia">Biologia</ion-option>
+          <ion-option value="Filosofia">Filosofia</ion-option>
+          <ion-option value="Fisica">Física</ion-option>
+          <ion-option value="Geografia">Geografia</ion-option>
+          <ion-option value="Historia">História</ion-option>
+          <ion-option value="Matematica">Matemática</ion-option>
+          <ion-option value="Portugues">Português</ion-option>
+          <ion-option value="Quimica">Química</ion-option>
+          <ion-option value="Sociologia">Sociologia</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="!form.controls.materia.valid && (form.controls.materia.dirty || form.controls.materia.touched)"
+        color="danger">
+        <div [hidden]="!form.controls.materia.errors.required">
+          O campo é obrigatório
+        </div>
+      </ion-item>
+      <br>
+
+      <ion-item>
+        <ion-label>Area Focada</ion-label>
+        <ion-select formControlName="foco" multiple="true" cancelText="Cancelar" okText="Ok">
+          <ion-option value="6_Ano_F">6° Ano - Ensino Fundamental</ion-option>
+          <ion-option value="7_Ano_F">7° Ano - Ensino Fundamental</ion-option>
+          <ion-option value="8_Ano_F">8° Ano - Ensino Fundamental</ion-option>
+          <ion-option value="9_Ano_F">9° Ano - Ensino Fundamental</ion-option>
+          <ion-option value="1_Ano_M">1° Ano - Ensino Médio</ion-option>
+          <ion-option value="2_Ano_M">2° Ano - Ensino Médio</ion-option>
+          <ion-option value="3_Ano_M">3° Ano - Ensino Médio</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="!form.controls.foco.valid && (form.controls.foco.dirty || form.controls.foco.touched)"
+        color="danger">
+        <div [hidden]="!form.controls.foco.errors.required">
+          O campo é obrigatório
+        </div>
+      </ion-item>
+      <br>
+
+      <ion-item>
+        <ion-label>Obs:</ion-label>
+        <ion-textarea formControlName="obs"></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <br>
+    <div padding style="text-align: center;">
+      <button ion-button class="btn" type="submit" [disabled]="!form.valid" (click)="onSubmit()">Salvar</button>
+    </div>
+  </form>
+</ion-content>

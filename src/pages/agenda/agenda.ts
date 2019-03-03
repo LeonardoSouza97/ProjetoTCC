@@ -19,7 +19,6 @@ export class AgendaPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AgendaPage');
   }
 
 

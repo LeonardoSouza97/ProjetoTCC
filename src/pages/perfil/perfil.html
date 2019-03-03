@@ -16,29 +16,27 @@
     <h2>Seu Perfil</h2>
   </ion-list-header>
 
-  <ion-img width="110" height="110" src="..." style="text-align: left; vertical-align: middle"></ion-img>
-  <button ion-button outline>Alterar foto</button>
-
-  <ion-list no-lines>
-    <ion-item>
-      <ion-label>Nome</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Idade</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Sexo</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>E-Mail</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Telefone</ion-label>
-    </ion-item>
-  </ion-list>
+  <table>
+    <tr>
+      <td style="padding: 25px;">
+        <ion-img width="110" height="110" src="..." style="text-align: left;"> </ion-img>
+      </td>
+      <td>
+        <div style="text-align: left">
+          {{this.currrentUser.nome}}<br>
+          {{this.currrentUser.nasc}}<br>
+          {{this.currrentUser.sexo}}
+        </div>
+      </td>
+    </tr>
+  </table>
 
   <ion-list-header>
     <h3>Aulas Oferecidas</h3>
   </ion-list-header>
+
+  <ion-fab right bottom>
+    <button ion-fab (click)="goAdicaoAula()">+</button>
+  </ion-fab>
 
 </ion-content>
