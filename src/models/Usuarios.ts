@@ -16,6 +16,8 @@ export class Usuarios {
   aval: number;
   qtdAval: number;
   tolkens: number;
+  foto: string;
+  cep: string;
 
   constructor() { }
 
@@ -30,5 +32,7 @@ export class Usuarios {
     this.aval = user.aval  ;
     this.qtdAval = user.qtdAval ;
     this.tolkens = user.tolkens ;
+    this.foto = user.foto;
+    this.cep = user.cep;
   }
 }

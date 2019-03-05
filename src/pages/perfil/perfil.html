@@ -11,15 +11,14 @@
 
 
 <ion-content padding>
-
   <ion-list-header>
     <h2>Seu Perfil</h2>
   </ion-list-header>
 
   <table>
     <tr>
-      <td style="padding: 25px;">
-        <ion-img width="110" height="110" src="..." style="text-align: left;"> </ion-img>
+      <td style="padding: 15px;  width: 50%;">
+        <ion-img width="110" height="110" src="{{ this.currrentUser.foto }}" style="text-align: left;"> </ion-img>
       </td>
       <td>
         <div style="text-align: left">
@@ -30,6 +29,11 @@
       </td>
     </tr>
   </table>
+  <ion-item *ngIf="this.cep != undefined">
+    <p>{{this.cep.logradouro}} <br>
+      Bairro: {{this.cep.bairro}} <br>
+      Cidade: {{this.cep.localidade}} &nbsp; UF: {{this.cep.uf}}</p>
+  </ion-item>
 
   <ion-list-header>
     <h3>Aulas Oferecidas</h3>

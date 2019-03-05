@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
+//import { Base64 } from '@ionic-native/base64/ngx';
 import { Component } from '@angular/core';
 import { AES256 } from '@ionic-native/aes-256';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -25,10 +27,11 @@ export class CadastroUsuarioPage {
   private senha: any;
   private cep: any;
   private valCEP: boolean;
+  private photo: string = "assets/imgs/coinZeta.png";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertController: AlertController,
-    private formBuilder: FormBuilder, private toast: ToastController, private provider: UsuarioProvider,
-    private aes256: AES256, private loadingCtrl: LoadingController, public http: HttpClient
+    private formBuilder: FormBuilder, private toast: ToastController, private provider: UsuarioProvider,// private base64: Base64,
+    private aes256: AES256, private loadingCtrl: LoadingController, public http: HttpClient, private camera: Camera
   ) {
 
     this.valCEP = false;
@@ -86,6 +89,20 @@ export class CadastroUsuarioPage {
     });
   }
 
+  getFoto() {
+    const options: CameraOptions = {
+      quality: 60,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      saveToPhotoAlbum: false,
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      this.photo = 'data:image/jpeg;base64,' + imageData;
+    }, (err) => {
+      this.toast.create({ message: 'Houve um erro ao carregar a imagem!', duration: 3000 }).present();
+    });
+  }
 
   async onSubmit() {
     const loading = this.loadingCtrl.create({
@@ -124,7 +141,7 @@ export class CadastroUsuarioPage {
         }
         else {
           obsv.unsubscribe();
-          this.provider.save(this.form.value, false, this.senha)
+          this.provider.save(this.form.value, false, this.senha, this.photo)
             .then(() => {
               loading.dismiss();
               this.toast.create({ message: 'Usuário cadastrado com sucesso.', duration: 3000 }).present();

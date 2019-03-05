@@ -10,7 +10,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
-import {AdicaoAulaPage } from '../pages/adicao-aula/adicao-aula';
+import { AdicaoAulaPage } from '../pages/adicao-aula/adicao-aula';
 import { AulasPage } from '../pages/aulas/aulas';
 import { AgendaPage } from '../pages/agenda/agenda';
 import { LoginPage } from '../pages/login/login';
@@ -26,6 +26,7 @@ import { CadastroUsuarioPage } from '../pages/cadastro-usuario/cadastro-usuario'
 import { AES256 } from '@ionic-native/aes-256';
 import { ConfigProvider } from '../providers/config/config';
 import { UsuarioProvider } from '../providers/usuario/usuario';
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { UsuarioProvider } from '../providers/usuario/usuario';
     StatusBar,
     SplashScreen,
     ConfigProvider,
+    Camera,
     UsuarioProvider,
     LoadingController,
     Usuarios,

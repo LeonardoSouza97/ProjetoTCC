@@ -29,7 +29,7 @@ export class UsuarioProvider {
     });
   }
 
-  save(usuarios: any, state: boolean, senha) {
+  save(usuarios: any, state: boolean, senha, photo: string) {
     return new Promise((resolve, reject) => {
       //    if (usuarios.key) {
       this.db.list(this.PATH)
@@ -46,6 +46,7 @@ export class UsuarioProvider {
           aval: 0, 
           senha: senha,
           ativo: state,
+          foto: photo
         })
         .then(() => resolve())
         .catch((e) => reject(e));

@@ -77,12 +77,12 @@ export class LoginPage {
         .then(res => {
           if (user != undefined && res == this.form.controls.senha.value) {
             loading.dismiss();
-            this.navCtrl.push(TabsPage);
-          }
+              this.navCtrl.push(TabsPage);
+         }
           else {
             loading.dismiss();
             this.toast.create({ message: 'Login e/ou Senha errado(s)!', duration: 3000 }).present();
-            this.form.controls.id.setValue("");
+           this.form.controls.id.setValue("");
             this.form.controls.senha.setValue("");
             this.usuario = undefined;
           }

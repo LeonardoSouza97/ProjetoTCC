@@ -9,7 +9,11 @@
 
 
 <ion-content padding>
-  <form [formGroup]="form">
+  <!-- src="{{this.photo}}" -->
+  <form [formGroup]="form">    
+
+    <ion-label stacked>Selecione uma imagem:</ion-label>
+    <ion-img width="110" height="110" src="{{ photo }}" style="text-align: left;" (click)="getFoto()"> </ion-img>
 
     <ion-label stacked>Nome:</ion-label>
     <ion-input type="text" formControlName="nome" maxlength="150"></ion-input>
@@ -94,7 +98,8 @@
       </div>
     </ion-item>
     <ion-item *ngIf="valCEP">
-      <p>Bairro: {{this.cep.bairro}} <br>
+      <p>{{this.cep.logradouro}} <br>
+      Bairro: {{this.cep.bairro}} <br>
       Cidade: {{this.cep.localidade}} &nbsp; UF: {{this.cep.uf}}</p>
     </ion-item>
 
