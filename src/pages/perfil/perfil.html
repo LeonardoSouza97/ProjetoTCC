@@ -39,6 +39,18 @@
     <h3>Aulas Oferecidas</h3>
   </ion-list-header>
 
+  <ion-card *ngFor="let materia of materias">
+    <ion-card-header>
+      {{materia.dados.key}}
+    </ion-card-header>
+    <ion-card-content>
+      Área Focada:<br>
+      {{materia.dados.foco}}<br><br> 
+      {{materia.dados.obs}}
+    </ion-card-content>
+  </ion-card>
+
+
   <ion-fab right bottom>
     <button ion-fab (click)="goAdicaoAula()">+</button>
   </ion-fab>

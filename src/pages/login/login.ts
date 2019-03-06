@@ -7,7 +7,6 @@ import { UsuarioProvider } from '../../providers/usuario/usuario';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { CadastroUsuarioPage } from '../cadastro-usuario/cadastro-usuario';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular'
-import { Console } from '@angular/core/src/console';
 
 /**
  * Generated class for the LoginPage page.
@@ -77,12 +76,12 @@ export class LoginPage {
         .then(res => {
           if (user != undefined && res == this.form.controls.senha.value) {
             loading.dismiss();
-              this.navCtrl.push(TabsPage);
-         }
+            this.navCtrl.push(TabsPage);
+          }
           else {
             loading.dismiss();
             this.toast.create({ message: 'Login e/ou Senha errado(s)!', duration: 3000 }).present();
-           this.form.controls.id.setValue("");
+            this.form.controls.id.setValue("");
             this.form.controls.senha.setValue("");
             this.usuario = undefined;
           }

@@ -2,7 +2,7 @@ import { Usuarios } from '../../models/Usuarios';
 import { AdicaoAulaPage } from '../adicao-aula/adicao-aula';
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
 import { HttpClient } from '@angular/common/http';
 
@@ -20,9 +20,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PerfilPage {
   private cep: any;
+  private materias: Array<any> = new Array;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private provider: UsuarioProvider,
-    private currrentUser: Usuarios, public http: HttpClient, ) {
+    private currrentUser: Usuarios, public http: HttpClient, private loadingCtrl: LoadingController) {
+
+    const loading = this.loadingCtrl.create({
+      spinner: 'dots',
+      content: 'Carregando...'
+    });
+
+    loading.present()
 
     if (currrentUser.cep.replace("-", "").length != 8) {
       return;
@@ -38,16 +46,19 @@ export class PerfilPage {
         this.cep = undefined;
       }
     });
+
+    provider.getAulasEnsinadas(currrentUser.id).then(async (data) => {
+      this.materias = data;
+    });
+
+    loading.dismiss();
   }
 
-ionViewDidLoad() {
-}
+  ionViewDidLoad() {
+  }
 
-goAdicaoAula() {
-  this.navCtrl.push(AdicaoAulaPage);
-}
-
-
-
+  goAdicaoAula() {
+    this.navCtrl.push(AdicaoAulaPage);
+  }
 
 }

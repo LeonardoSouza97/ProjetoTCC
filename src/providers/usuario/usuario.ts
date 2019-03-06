@@ -41,9 +41,9 @@ export class UsuarioProvider {
           email: usuarios.email,
           fone: usuarios.fone,
           cep: usuarios.cep,
-          tolkens: 10, 
+          tolkens: 10,
           qtdAval: 0,
-          aval: 0, 
+          aval: 0,
           senha: senha,
           ativo: state,
           foto: photo
@@ -75,10 +75,40 @@ export class UsuarioProvider {
       this.db.list("/aulas/" + aula.controls.materia.value + "/")
         .update(userId, {
           foco: aula.controls.foco.value,
-          obs: aula.controls.obs.value,    
+          obs: aula.controls.obs.value,
         })
         .then(() => resolve())
         .catch((e) => reject(e));
     })
+  }
+
+  async getAulasEnsinadas(userId: string) {
+    var materias: Array<string> = ["Biologia", "Filosofia", "Fisica", "Geografia", "Historia", "Matematica", "Portugues", "Quimica", "Sociologia"];
+    var encontradas: Array<any> = new Array;
+
+    for (var i: number = 0; i < 9; ++i) {
+      await this.db.object("/aulas/" + materias[i] + "/" + userId).snapshotChanges().map(c => {
+        return { key: c.key, ...c.payload.val() };
+      }).subscribe(async (data) => {
+        var dados: any = await data;
+
+        if (data.key != null) {
+          switch (encontradas.length) {
+            case 0: { dados.key = "Biologia"; break; }
+            case 1: { dados.key = "Filosofia"; break; }
+            case 2: { dados.key = "Física"; break; }
+            case 3: { dados.key = "Geografia"; break; }
+            case 4: { dados.key = "História"; break; }
+            case 5: { dados.key = "Matemática"; break; }
+            case 6: { dados.key = "Português"; break; }
+            case 7: { dados.key = "Química"; break; }
+            case 8: { dados.key = "Sociologia"; break; }
+            default: { dados.key = "Outro"; break; }
+          } 
+          encontradas.push({ dados });
+        }
+      });
+    }
+    return encontradas;
   }
 }
