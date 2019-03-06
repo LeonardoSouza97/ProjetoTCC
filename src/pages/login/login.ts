@@ -58,7 +58,7 @@ export class LoginPage {
       content: 'Carregando...'
     });
 
-    loading.present();
+    // loading.present();
 
     if (this.form.controls.senha.value == null || this.form.controls.id.value == null) {
       loading.dismiss();
@@ -91,9 +91,7 @@ export class LoginPage {
           this.toast.create({ message: 'Login e/ou Senha errado(s)!', duration: 3000 }).present()
         }
         );
-
     });
   }
+
 }
-
-

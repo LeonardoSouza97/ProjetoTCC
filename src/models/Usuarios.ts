@@ -27,6 +27,7 @@ export class Usuarios {
     this.cpf = user.cpf;
     this.nasc = user.nasc;
     this.sexo = user.sexo;
+    this.senha = user.senha;
     this.email = user.email;
     this.fone = user.fone;
     this.aval = user.aval  ;
