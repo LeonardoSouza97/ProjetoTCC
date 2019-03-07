@@ -7,7 +7,6 @@ import { UsuarioProvider } from '../../providers/usuario/usuario';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { CadastroUsuarioPage } from '../cadastro-usuario/cadastro-usuario';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular'
-
 /**
  * Generated class for the LoginPage page.
  *
