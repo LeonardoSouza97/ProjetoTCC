@@ -15,6 +15,7 @@ import { AulasPage } from '../pages/aulas/aulas';
 import { AgendaPage } from '../pages/agenda/agenda';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
+import { ChatsPage } from '../pages/listachat/chats';
 import { BuscaPage } from '../pages/busca/busca';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { TabsPage } from '../pages/tabs/tabs';

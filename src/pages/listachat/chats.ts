@@ -2,9 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { AngularFirestore } from "angularfire2/firestore";
 import { Storage } from "@ionic/storage";
-// import { appconfig } from "../../providers/config/config.ts";
-import { Usuarios } from '../../models/Usuarios';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
+import { Usuarios } from '../../models/Usuarios';
+// import { appconfig } from "../../app/app.config";
+
 import { Observable } from "rxjs/Observable";
 
 import { map } from "rxjs/operators";
@@ -25,12 +26,13 @@ import { map } from "rxjs/operators";
 })
 export class ChatsPage implements OnInit {
   availableusers: any = [];
-  chatuser;
+  usuario: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private db: AngularFirestore,
     private storage: Storage,
+    private provider: UsuarioProvider,    
     // private chatService: ChatService
   ) {}
 
@@ -39,14 +41,15 @@ export class ChatsPage implements OnInit {
   }
 
   ngOnInit() {
+    var busca : any;
     //Fetch other users
     //let loggedInUser = this.storage.get("chatuser");
 
     this.storage.get("chatuser").then(chatuser => {
-      this.chatuser = chatuser;
+      this.usuario = chatuser;
 
       this.db
-        .collection<Usuarios>(UsuarioProvider)
+        .collection<Usuarios>(this.provider.get())
         .valueChanges()
         .subscribe(users => {
           //this.availableusers = users;
