@@ -53,7 +53,7 @@ export class ChatsPage implements OnInit {
         .valueChanges()
         .subscribe(users => {
           //this.availableusers = users;
-          console.log(users);
+          console.log(Usuarios);
           this.availableusers = users.filter(user => {
             if (user.email != chatuser.email) {
               return user;
