@@ -36,7 +36,7 @@
     "com-badrit-base64": "^0.2.0",
     "cordova-android": "7.1.4",
     "cordova-plugin-add-swift-support": "^1.7.2",
-    "cordova-plugin-aes256-encryption": "^1.1.0",
+    "cordova-plugin-aes256-encryption": "^1.2.0",
     "cordova-plugin-camera": "^4.0.3",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.1.3",

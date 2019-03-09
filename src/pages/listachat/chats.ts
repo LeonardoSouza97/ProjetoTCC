@@ -47,7 +47,7 @@ export class ChatsPage implements OnInit {
       this.usuario = usuario;//usuario logado
 
       this.db
-        .collection<Usuarios>(this.provider.get("Meunome"))
+        .collection<Usuarios>(appconfig.users_endpoint)
         .valueChanges()
         .subscribe(users => {
           // this.availableusers = Usuarios;
