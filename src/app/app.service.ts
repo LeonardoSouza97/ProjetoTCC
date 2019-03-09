@@ -10,20 +10,21 @@ import { UsuarioProvider } from "../providers/usuario/usuario";
 import { appconfig } from "./app.config";
 
 @Injectable()
-export class ChatService {
+export class ChatService { //service do chat 
+
   users: AngularFirestoreCollection<Usuarios>;
   private userDoc: AngularFirestoreDocument<Usuarios>;
-
+  private provider: UsuarioProvider;
   chats: AngularFirestoreCollection<Chat>;
   private chatDoc: AngularFirestoreDocument<Chat>;
 
-  //The pair string for the two users currently chatting
+  //pair indica os dois users que esntao na call
   currentChatPairId;
   currentChatPartner;
 
   constructor(private db: AngularFirestore) {
     //Get the tasks collecction
-    this.users = db.collection<Usuarios>(appconfig.users_endpoint);
+    this.users = db.collection<Usuarios>(this.provider.get(""));
     this.chats = db.collection<Chat>(appconfig.chats_endpoint);
   }
 

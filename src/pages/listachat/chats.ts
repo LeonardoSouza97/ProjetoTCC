@@ -4,7 +4,7 @@ import { AngularFirestore } from "angularfire2/firestore";
 import { Storage } from "@ionic/storage";
 import { UsuarioProvider } from '../../providers/usuario/usuario';
 import { Usuarios } from '../../models/Usuarios';
-
+import { appconfig } from "../../app/app.config";
 
 import { Observable } from "rxjs/Observable";
 
@@ -26,14 +26,14 @@ import { ChatroomPage } from "../chatroom/chatroom";
 })
 export class ChatsPage implements OnInit {
   availableusers: any = [];
-  usuario: any;
+  usuario;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private db: AngularFirestore,
     private storage: Storage,
     private provider: UsuarioProvider,    
-    // private chatService: ChatService
+    private chatService: ChatService
   ) {}
 
   ionViewDidLoad() {
@@ -43,18 +43,18 @@ export class ChatsPage implements OnInit {
   ngOnInit() {
     var busca : any;   
 
-    this.storage.get("chatuser").then(chatuser => {
-      this.usuario = chatuser;
+    this.storage.get("chatuser").then(usuario => {
+      this.usuario = usuario;//usuario logado
 
       this.db
         .collection<Usuarios>(this.provider.get("Meunome"))
         .valueChanges()
         .subscribe(users => {
-          //this.availableusers = users;
-          console.log(Usuarios);
-          this.availableusers = users.filter(user => {
-            if (user.email != chatuser.email) {
-              return user;
+          // this.availableusers = Usuarios;
+          console.log(users);
+          this.availableusers = usuario.filter(Usuarios => {
+            if (usuario.email != Usuarios.email) {//verificando para o proprio usuario nao aparecer no chat
+              return Usuarios;
             }
           });
         });
@@ -63,7 +63,7 @@ export class ChatsPage implements OnInit {
 
   goToChat(chatpartner) {
     this.chatService.currentChatPairId = this.chatService.createPairId(
-      this.chatuser,
+      this.usuario,
       chatpartner
     );
 
