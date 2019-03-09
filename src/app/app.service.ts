@@ -24,7 +24,7 @@ export class ChatService { //service do chat
 
   constructor(private db: AngularFirestore) {
     //Get the tasks collecction
-    this.users = db.collection<Usuarios>(this.provider.get(""));
+    this.users = db.collection<Usuarios>(appconfig.users_endpoint);
     this.chats = db.collection<Chat>(appconfig.chats_endpoint);
   }
 
