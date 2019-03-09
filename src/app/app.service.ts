@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import {
-  AngularFirestoreDocument,
   AngularFirestore,
   AngularFirestoreCollection
 } from "angularfire2/firestore";
@@ -12,11 +11,10 @@ import { appconfig } from "./app.config";
 @Injectable()
 export class ChatService { //service do chat 
 
-  users: AngularFirestoreCollection<Usuarios>;
-  private userDoc: AngularFirestoreDocument<Usuarios>;
+  users: AngularFirestoreCollection<Usuarios>;  
   private provider: UsuarioProvider;
   chats: AngularFirestoreCollection<Chat>;
-  private chatDoc: AngularFirestoreDocument<Chat>;
+ 
 
   //pair indica os dois users que esntao na call
   currentChatPairId;
@@ -27,10 +25,6 @@ export class ChatService { //service do chat
     this.users = db.collection<Usuarios>(appconfig.users_endpoint);
     this.chats = db.collection<Chat>(appconfig.chats_endpoint);
   }
-
-  addUser(payload) {
-    return this.users.add(payload);
-  } //addUser
 
   addChat(chat: Chat) {
     return this.chats.add(chat);

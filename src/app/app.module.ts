@@ -29,7 +29,7 @@ import { CadastroUsuarioPage } from '../pages/cadastro-usuario/cadastro-usuario'
 import { AES256 } from '@ionic-native/aes-256';
 import { ConfigProvider } from '../providers/config/config';
 import { UsuarioProvider } from '../providers/usuario/usuario';
-import { ChatService } from '../app/app.service';
+import { ChatService } from './app.service';
 
 import { Camera } from '@ionic-native/camera';
 
