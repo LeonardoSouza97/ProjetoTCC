@@ -9,8 +9,8 @@ import { Usuarios } from '../../models/Usuarios';
 import { Observable } from "rxjs/Observable";
 
 import { map } from "rxjs/operators";
-// import { ChatService } from "../../app/app.service";
-// import { ChatroomPage } from "../chatroom/chatroom";
+import { ChatService } from "../../app/app.service";
+import { ChatroomPage } from "../chatroom/chatroom";
 
 /**
  * Generated class for the ChatsPage page.
