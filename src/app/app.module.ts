@@ -1,4 +1,3 @@
-import { ChatService } from './app.service';
 import { Usuarios } from '../models/Usuarios';
 import { Chat } from '../models/Chat';
 
