@@ -1,4 +1,6 @@
+import { ChatService } from './app.service';
 import { Usuarios } from '../models/Usuarios';
+import { Chat } from '../models/Chat';
 
 import { HttpClientModule } from '@angular/common/http';
 import { MyApp } from './app.component';
@@ -28,6 +30,8 @@ import { CadastroUsuarioPage } from '../pages/cadastro-usuario/cadastro-usuario'
 import { AES256 } from '@ionic-native/aes-256';
 import { ConfigProvider } from '../providers/config/config';
 import { UsuarioProvider } from '../providers/usuario/usuario';
+import { ChatService } from '../app/app.service';
+
 import { Camera } from '@ionic-native/camera';
 
 @NgModule({
@@ -87,6 +91,8 @@ import { Camera } from '@ionic-native/camera';
     LoadingController,
     Usuarios,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    ChatService,
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
 
   ]
 })
