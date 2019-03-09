@@ -16,6 +16,7 @@ import { AgendaPage } from '../pages/agenda/agenda';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { ChatsPage } from '../pages/listachat/chats';
+import { ChatroomPage } from "../pages/chatroom/chatroom";
 import { BuscaPage } from '../pages/busca/busca';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { TabsPage } from '../pages/tabs/tabs';

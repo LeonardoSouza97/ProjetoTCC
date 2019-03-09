@@ -4,7 +4,7 @@ import { AngularFirestore } from "angularfire2/firestore";
 import { Storage } from "@ionic/storage";
 import { UsuarioProvider } from '../../providers/usuario/usuario';
 import { Usuarios } from '../../models/Usuarios';
-// import { appconfig } from "../../app/app.config";
+
 
 import { Observable } from "rxjs/Observable";
 
@@ -41,15 +41,13 @@ export class ChatsPage implements OnInit {
   }
 
   ngOnInit() {
-    var busca : any;
-    //Fetch other users
-    //let loggedInUser = this.storage.get("chatuser");
+    var busca : any;   
 
     this.storage.get("chatuser").then(chatuser => {
       this.usuario = chatuser;
 
       this.db
-        .collection<Usuarios>(this.provider.get())
+        .collection<Usuarios>(this.provider.get("Meunome"))
         .valueChanges()
         .subscribe(users => {
           //this.availableusers = users;
