@@ -47,6 +47,7 @@
     "cordova-plugin-whitelist": "^1.3.3",
     "cryptlib": "^1.0.3",
     "firebase": "^5.8.1",
+    "ionic": "^4.11.0",
     "ionic-angular": "3.9.2",
     "ionic-input-mask": "^1.0.1",
     "ionicons": "3.0.0",
