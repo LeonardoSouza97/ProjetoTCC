@@ -39,7 +39,7 @@
     <h3>Aulas Oferecidas</h3>
   </ion-list-header>
 
-  <ion-card *ngFor="let materia of materias">
+  <ion-card *ngFor="let materia of materias" [hidden]="materia.dados.key == null">
     <ion-card-header>
       {{materia.dados.key}}
     </ion-card-header>

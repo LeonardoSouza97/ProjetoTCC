@@ -27,6 +27,7 @@ import { AES256 } from '@ionic-native/aes-256';
 import { ConfigProvider } from '../providers/config/config';
 import { UsuarioProvider } from '../providers/usuario/usuario';
 import { Camera } from '@ionic-native/camera';
+import { BuscaProvider } from '../providers/busca/busca';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { Camera } from '@ionic-native/camera';
     LoadingController,
     Usuarios,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    BuscaProvider,
 
   ]
 })

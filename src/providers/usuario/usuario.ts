@@ -105,8 +105,8 @@ export class UsuarioProvider {
             case 8: { dados.key = "Sociologia"; break; }
             default: { dados.key = "Outro"; break; }
           } 
-          encontradas.push({ dados });
         }
+        encontradas.push({ dados });
       });
     }
     return encontradas;
