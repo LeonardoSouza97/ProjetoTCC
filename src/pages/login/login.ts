@@ -72,7 +72,7 @@ export class LoginPage {
       user.id = data.key;
       this.currentUser.setCurrent(user);
 
-     this.aes256.decrypt(this.provider.secureKey, this.provider.secureIV, String(this.currentUser.senha).replace("/n", ""))
+      this.aes256.decrypt(this.provider.secureKey, this.provider.secureIV, String(this.currentUser.senha).replace("/n", ""))
         .then(res => {
           if (user != undefined && res == this.form.controls.senha.value) { 
             loading.dismiss();
@@ -89,8 +89,7 @@ export class LoginPage {
         .catch((error: any) => {
           loading.dismiss();
           this.toast.create({ message: 'Login e/ou Senha errado(s)!', duration: 3000 }).present()
-        }
-        );
+        });
     });
   }
 

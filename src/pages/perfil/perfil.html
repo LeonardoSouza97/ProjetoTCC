@@ -45,15 +45,24 @@
       Disponibilidade: <br>
       {{materia.dados.periodo}}<br>
       {{materia.dados.dias}}<br><br>
-      
+
       Área Focada:<br>
-      {{materia.dados.foco}}<br><br> 
+      {{materia.dados.foco}}<br><br>
       {{materia.dados.obs}}
     </ion-card-content>
   </ion-card>
 
   <ion-fab right bottom [hidden]="this.profile != this.currrentUser">
-    <button ion-fab (click)="goAdicaoAula()">+</button>
+    <button ion-fab (click)="goAdicaoAula()">
+      <ion-icon name="add"></ion-icon>
+    </button>
   </ion-fab>
+
+  <ion-fab right bottom [hidden]="this.profile == this.currrentUser"><!--Necessário adição do chat-->>
+    <button ion-fab>
+      <ion-icon name="chatbubbles"></ion-icon>
+    </button>
+  </ion-fab>
+
 
 </ion-content>
