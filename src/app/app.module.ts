@@ -9,6 +9,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 import { AdicaoAulaPage } from '../pages/adicao-aula/adicao-aula';
 import { AulasPage } from '../pages/aulas/aulas';
@@ -83,7 +84,6 @@ import { BuscaProvider } from '../providers/busca/busca';
     Usuarios,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     BuscaProvider,
-
   ]
 })
 export class AppModule { }

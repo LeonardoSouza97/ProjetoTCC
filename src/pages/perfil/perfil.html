@@ -5,8 +5,6 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-
 </ion-header>
 
 
@@ -18,13 +16,13 @@
   <table>
     <tr>
       <td style="padding: 15px;  width: 50%;">
-        <ion-img width="110" height="110" src="{{ this.currrentUser.foto }}" style="text-align: left;"> </ion-img>
+        <ion-img width="110" height="110" src="{{ this.profile.foto }}" style="text-align: left;"> </ion-img>
       </td>
       <td>
         <div style="text-align: left">
-          {{this.currrentUser.nome}}<br>
-          {{this.currrentUser.nasc}}<br>
-          {{this.currrentUser.sexo}}
+          {{this.profile.nome}}<br>
+          {{this.profile.nasc}}<br>
+          {{this.profile.sexo}}
         </div>
       </td>
     </tr>
@@ -44,14 +42,17 @@
       {{materia.dados.key}}
     </ion-card-header>
     <ion-card-content>
+      Disponibilidade: <br>
+      {{materia.dados.periodo}}<br>
+      {{materia.dados.dias}}<br><br>
+      
       Área Focada:<br>
       {{materia.dados.foco}}<br><br> 
       {{materia.dados.obs}}
     </ion-card-content>
   </ion-card>
 
-
-  <ion-fab right bottom>
+  <ion-fab right bottom [hidden]="this.profile != this.currrentUser">
     <button ion-fab (click)="goAdicaoAula()">+</button>
   </ion-fab>
 

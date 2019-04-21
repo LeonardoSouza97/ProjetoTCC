@@ -8,7 +8,7 @@
   <form [formGroup]="form">
     <ion-item>
       <ion-label floating>Selecione uma matéria</ion-label>
-      <ion-select interface="popover" formControlName="materia" (ionChange)="teste()">
+      <ion-select interface="popover" formControlName="materia" (ionChange)="buscarMateria()">
         <ion-option value="Biologia">Biologia</ion-option>
         <ion-option value="Filosofia">Filosofia</ion-option>
         <ion-option value="Fisica">Física</ion-option>
@@ -24,10 +24,128 @@
 </ion-header>
 
 <ion-content padding>
-  <button ion-button (click)="exibirFiltros()">Exibir Filtros</button>
+  <button ion-button (click)="exibirFiltros()">Exibir/Ocultar Filtros</button>
+  <!--<button ion-button (click)="removerFiltros()">Limpar Filtros</button>-->
+
+  <ion-label [hidden]="!this.filtorAtivo">Foco:</ion-label>
+  <ion-item [hidden]="!this.filtorAtivo">
+    <ion-label>6° Ano - Ensino Fundamental</ion-label>
+    <ion-checkbox [(ngModel)]="foco" (ionChange)="provider.filtroFoco('foco',foco,'6° Ano - Ensino Fundamental')">
+    </ion-checkbox>
+  </ion-item>
 
   <ion-item [hidden]="!this.filtorAtivo">
-    <ion-searchbar [(ngModel)]="barraBusca" (ionInput)="teste2('barraBusca')"></ion-searchbar>
-
+    <ion-label>7° Ano - Ensino Fundamental</ion-label>  
+    <ion-checkbox [(ngModel)]="foco2" (ionChange)="provider.filtroFoco('foco',foco2,'7° Ano - Ensino Fundamental')">
+    </ion-checkbox>
   </ion-item>
+
+  <ion-item [hidden]="!this.filtorAtivo">
+    <ion-label>8° Ano - Ensino Fundamental</ion-label>
+    <ion-checkbox [(ngModel)]="foco3" (ionChange)="provider.filtroFoco('foco',foco3,'8° Ano - Ensino Fundamental')">
+    </ion-checkbox>
+  </ion-item>
+
+  <ion-item [hidden]="!this.filtorAtivo">
+    <ion-label>9° Ano - Ensino Fundamental</ion-label>
+    <ion-checkbox [(ngModel)]="foco4" (ionChange)="provider.filtroFoco('foco',foco4,'9° Ano - Ensino Fundamental')">
+    </ion-checkbox>
+  </ion-item>
+
+  <ion-item [hidden]="!this.filtorAtivo">
+    <ion-label>1° Ano - Ensino Médio</ion-label>
+    <ion-checkbox [(ngModel)]="foco5" (ionChange)="provider.filtroFoco('foco',foco5,'1° Ano - Ensino Médio')">
+    </ion-checkbox>
+  </ion-item>
+
+  <ion-item [hidden]="!this.filtorAtivo">
+    <ion-label>2° Ano - Ensino Médio</ion-label>
+    <ion-checkbox [(ngModel)]="foco6" (ionChange)="provider.filtroFoco('foco',foco6,'2° Ano - Ensino Médio')">
+    </ion-checkbox>
+  </ion-item>
+
+  <ion-item [hidden]="!this.filtorAtivo">
+    <ion-label>3° Ano - Ensino Médio</ion-label>
+    <ion-checkbox [(ngModel)]="foco7" (ionChange)="provider.filtroFoco('foco',foco7,'3° Ano - Ensino Médio')">
+    </ion-checkbox>
+  </ion-item>
+
+
+  <ion-label [hidden]="!this.filtorAtivo">Período:</ion-label>
+  <ion-item [hidden]="!this.filtorAtivo">
+    <ion-label>Matutino</ion-label>
+    <ion-checkbox [(ngModel)]="periodo" (ionChange)="provider.filtroPeriodo('periodo',periodo,'Matutino')">
+    </ion-checkbox>
+  </ion-item>
+
+  <ion-item [hidden]="!this.filtorAtivo">
+    <ion-label>Vespertino</ion-label>
+    <ion-checkbox [(ngModel)]="perido2" (ionChange)="provider.filtroPeriodo('periodo',perido2,'Vespertino')">
+    </ion-checkbox>
+  </ion-item>
+
+  <ion-item [hidden]="!this.filtorAtivo">
+    <ion-label>Noturno</ion-label>
+    <ion-checkbox [(ngModel)]="periodo3" (ionChange)="provider.filtroPeriodo('periodo',periodo3,'Noturno')">
+    </ion-checkbox>
+  </ion-item>
+
+  <ion-label [hidden]="!this.filtorAtivo">Dia da semana:</ion-label>
+  <ion-item [hidden]="!this.filtorAtivo">
+    <ion-label>Domingo</ion-label>
+    <ion-checkbox [(ngModel)]="dia" (ionChange)="provider.filtroDias('dias',dia,'Domingo')">
+    </ion-checkbox>
+  </ion-item>
+
+  <ion-item [hidden]="!this.filtorAtivo">
+    <ion-label>Segunda-feira</ion-label>
+    <ion-checkbox [(ngModel)]="dia2" (ionChange)="provider.filtroDias('dias',dia2,'Segunda-feira')">
+    </ion-checkbox>
+  </ion-item>
+
+  <ion-item [hidden]="!this.filtorAtivo">
+    <ion-label>Terça-feira</ion-label>
+    <ion-checkbox [(ngModel)]="dia3" (ionChange)="provider.filtroDias('dias',dia3,'Terça-feira')">
+    </ion-checkbox>
+  </ion-item>
+
+  <ion-item [hidden]="!this.filtorAtivo">
+    <ion-label>Quarta-feira</ion-label>
+    <ion-checkbox [(ngModel)]="dia4" (ionChange)="provider.filtroDias('dias',dia4,'Quarta-feira')">
+    </ion-checkbox>
+  </ion-item>
+
+  <ion-item [hidden]="!this.filtorAtivo">
+    <ion-label>Quinta-feira</ion-label>
+    <ion-checkbox [(ngModel)]="dia5" (ionChange)="provider.filtroDias('dias',dia5,'Quinta-feira')">
+    </ion-checkbox>
+  </ion-item>
+
+  <ion-item [hidden]="!this.filtorAtivo">
+    <ion-label>Sexta-feira</ion-label>
+    <ion-checkbox [(ngModel)]="dia6" (ionChange)="provider.filtroDias('dias',dia6,'Sexta-feira')">
+    </ion-checkbox>
+  </ion-item>
+
+  <ion-item [hidden]="!this.filtorAtivo">
+    <ion-label>Sábado</ion-label>
+    <ion-checkbox [(ngModel)]="dia7" (ionChange)="provider.filtroDias('dias',dia7,'Sábado')">
+    </ion-checkbox>
+  </ion-item>
+
+  <ion-card *ngFor="let tutor of provider.tutoresFiltradas" (click)="buscarUsuario(tutor)">
+    <ion-card-header>
+      {{tutor.key}}
+    </ion-card-header>
+    <ion-card-content>
+      Disponibilidade: <br>
+      {{tutor.periodo}}<br>
+      {{tutor.dias}}<br><br>
+
+      Área Focada:<br>
+      {{tutor.foco}}<br><br>
+      {{tutor.obs}}
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

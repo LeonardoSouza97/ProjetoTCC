@@ -55,6 +55,42 @@
       <br>
 
       <ion-item>
+        <ion-label>Periodos disponíveis</ion-label>
+        <ion-select formControlName="periodo" multiple="true" cancelText="Cancelar" okText="Ok">
+          <ion-option value="Matutino">Matutino</ion-option>
+          <ion-option value="Vespertino">Vespertino</ion-option>
+          <ion-option value="Noturno">Noturno</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="!form.controls.periodo.valid && (form.controls.periodo.dirty || form.controls.periodo.touched)"
+        color="danger">
+        <div [hidden]="!form.controls.periodo.errors.required">
+          O campo é obrigatório
+        </div>
+      </ion-item>
+      <br>
+
+      <ion-item>
+        <ion-label>Dias da semana disponíveis</ion-label>
+        <ion-select formControlName="dias" multiple="true" cancelText="Cancelar" okText="Ok">
+          <ion-option value="Domingo">Domingo</ion-option>
+          <ion-option value="Segunda-feira">Segunda-feira</ion-option>
+          <ion-option value="Terça-feira">Terça-feira</ion-option>
+          <ion-option value="Quarta-feira">Quarta-feira</ion-option>
+          <ion-option value="Quinta-feira">Quinta-feira</ion-option>
+          <ion-option value="Sexta-feira">Sexta-feira</ion-option>
+          <ion-option value="Sábado">Sábado</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="!form.controls.dias.valid && (form.controls.dias.dirty || form.controls.dias.touched)"
+        color="danger">
+        <div [hidden]="!form.controls.dias.errors.required">
+          O campo é obrigatório
+        </div>
+      </ion-item>
+      <br>
+
+      <ion-item>
         <ion-label>Obs:</ion-label>
         <ion-textarea formControlName="obs"></ion-textarea>
       </ion-item>

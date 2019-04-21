@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { BuscaProvider } from '../../providers/busca/busca';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { UsuarioProvider } from '../../providers/usuario/usuario';
+import { PerfilPage } from '../perfil/perfil';
 
 /**
  * Generated class for the BuscaPage page.
@@ -20,8 +22,8 @@ export class BuscaPage {
   private filtorAtivo: boolean;
   private busca: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private provider: BuscaProvider,
-    private formBuilder: FormBuilder) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController,
+    private formBuilder: FormBuilder, private provider: BuscaProvider, private bd: UsuarioProvider) {
     this.busca = this.navParams.data.contact || {};
     this.createForm();
 
@@ -41,15 +43,21 @@ export class BuscaPage {
     this.filtorAtivo = !this.filtorAtivo;
   }
 
-  teste() {
+  async buscarMateria() {
     this.provider.getMateria(this.form.controls.materia.value);
-    console.log(this.provider.materiasFiltradas);
   }
 
-  teste2(teste: string) {
-    // this.provider.filtroIgual();
-    console.log(this.provider.materiasFiltradas);
+  removerFiltros() {
+    this.provider.limparFiltros();
   }
 
+  async buscarUsuario(tutor) {
+    this.bd.get(tutor.key).subscribe(async (data) => {
+      var user: any;
+      user = data;
+      this.navCtrl.push(PerfilPage, {user});
+    });
+
+  }
 
 }

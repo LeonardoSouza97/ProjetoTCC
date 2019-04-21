@@ -21,7 +21,7 @@ import { HttpClient } from '@angular/common/http';
 export class PerfilPage {
   private cep: any;
   private materias: Array<any> = new Array;
-
+  private profile: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private provider: UsuarioProvider,
     private currrentUser: Usuarios, public http: HttpClient, private loadingCtrl: LoadingController) {
 
@@ -32,11 +32,17 @@ export class PerfilPage {
 
     loading.present()
 
-    if (currrentUser.cep.replace("-", "").length != 8) {
+    this.profile = navParams.get('user');
+  
+    if (this.profile == undefined) {
+      this.profile = currrentUser;
+    }
+
+    if (this.profile.cep.replace("-", "").length != 8) {
       return;
     }
 
-    this.http.get('http://viacep.com.br/ws/' + currrentUser.cep.replace("-", "") + '/json/').map(res => res).subscribe(data => {
+    this.http.get('http://viacep.com.br/ws/' + this.profile.cep.replace("-", "") + '/json/').map(res => res).subscribe(data => {
       var cep: any;
       cep = data;
 
@@ -47,9 +53,15 @@ export class PerfilPage {
       }
     });
 
-    provider.getAulasEnsinadas(currrentUser.id).then(async (data) => {
-      this.materias = data;
-    });
+    if(this.profile == this.currrentUser){
+      provider.getAulasEnsinadas(this.profile.id).then(async (data) => {
+        this.materias = data;
+      });
+    }else{
+      provider.getAulasEnsinadas(this.profile.key).then(async (data) => {
+        this.materias = data;
+      });
+    }
 
     loading.dismiss();
   }

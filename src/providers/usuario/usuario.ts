@@ -50,7 +50,7 @@ export class UsuarioProvider {
         })
         .then(() => resolve())
         .catch((e) => reject(e));
-      /*      } else {
+      /*      } else { Não mexer substituirá faz Insert
               this.db.list(this.PATH)
                 .push({
                   nome: usuarios.nome,
@@ -75,6 +75,8 @@ export class UsuarioProvider {
       this.db.list("/aulas/" + aula.controls.materia.value + "/")
         .update(userId, {
           foco: aula.controls.foco.value,
+          periodo: aula.controls.periodo.value,
+          dias: aula.controls.dias.value,
           obs: aula.controls.obs.value,
         })
         .then(() => resolve())

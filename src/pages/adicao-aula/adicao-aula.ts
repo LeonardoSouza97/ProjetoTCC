@@ -35,6 +35,8 @@ export class AdicaoAulaPage {
     this.form = this.formBuilder.group({
       foco: [this.aula.foco, Validators.required],
       materia: [this.aula.materia, Validators.required],
+      periodo: [this.aula.materia, Validators.required],
+      dias: [this.aula.dias, Validators.required],
       obs: [this.aula.obs],
     });
   }
@@ -47,13 +49,14 @@ export class AdicaoAulaPage {
 
     loading.present();
 
-    /*var obsv = this.provider.get(this.form.controls.id.value).subscribe((data) => {
-      if (data.key != null) {
-        loading.dismiss();
-        return;
-      }
-      else {
-        obsv.unsubscribe();*/
+    /*Se der ruim comentar*/
+    var obsv = this.provider.get(this.form.controls.id.value).subscribe((data) => { //<--
+      if (data.key != null) {//<--
+        loading.dismiss();//<--
+        return;//<--
+      }//<--
+      else {//<--
+        obsv.unsubscribe();//<--
         this.provider.cadAulaUsuario(this.form, this.currentUser.id)
           .then(() => {
             loading.dismiss();
@@ -65,8 +68,8 @@ export class AdicaoAulaPage {
             this.toast.create({ message: 'Erro ao adicionar aula!', duration: 3000 }).present();
             console.error(e);
           });
-     // }
-   // });
+      }
+    });
   }
 
 }
