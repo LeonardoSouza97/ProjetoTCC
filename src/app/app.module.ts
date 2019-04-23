@@ -30,6 +30,7 @@ import { AES256 } from '@ionic-native/aes-256';
 import { ConfigProvider } from '../providers/config/config';
 import { UsuarioProvider } from '../providers/usuario/usuario';
 import { ChatService } from './app.service';
+import { PipesModule } from "../pipes/pipes.module";
 
 import { Camera } from '@ionic-native/camera';
 
@@ -52,6 +53,7 @@ import { Camera } from '@ionic-native/camera';
   imports: [
     InputMaskModule,
     BrowserModule,
+    PipesModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyD7ZTSbW2FkKtsh_rLQPRAYcjR9sqC8Pu8",
