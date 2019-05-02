@@ -132,8 +132,9 @@
     <ion-checkbox [(ngModel)]="dia7" (ionChange)="provider.filtroDias('dias',dia7,'Sábado')">
     </ion-checkbox>
   </ion-item>
-
-  <ion-card *ngFor="let tutor of provider.tutoresFiltradas" (click)="buscarUsuario(tutor)">
+  <br>
+  <br>
+  <ion-card *ngFor="let tutor of provider.tutoresFiltradas" (click)="buscarUsuario(tutor)" [hidden]="tutor.key==this.currrentUser.id">
     <ion-card-header>
       {{tutor.key}}
     </ion-card-header>

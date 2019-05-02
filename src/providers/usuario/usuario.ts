@@ -15,14 +15,6 @@ export class UsuarioProvider {
 
   constructor(private db: AngularFireDatabase) { }
 
-  getAll() {
-    return this.db.list(this.PATH, ref => ref.orderByChild('id'))
-      .snapshotChanges()
-      .map(changes => {
-        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
-      })
-  }
-
   get(key: string) {
     return this.db.object(this.PATH + key).snapshotChanges().map(c => {
       return { key: c.key, ...c.payload.val() };
@@ -31,7 +23,6 @@ export class UsuarioProvider {
 
   save(usuarios: any, state: boolean, senha, photo: string) {
     return new Promise((resolve, reject) => {
-      //    if (usuarios.key) {
       this.db.list(this.PATH)
         .update(usuarios.id, {
           nome: usuarios.nome,
@@ -50,20 +41,7 @@ export class UsuarioProvider {
         })
         .then(() => resolve())
         .catch((e) => reject(e));
-      /*      } else { Não mexer substituirá faz Insert
-              this.db.list(this.PATH)
-                .push({
-                  nome: usuarios.nome,
-                  cpf: usuarios.cpf,
-                  nasc: usuarios.nasc,
-                  email: usuarios.email,
-                  fone: usuarios.fone,
-                  senha: usuarios.senha,
-                  ativo: false,
-                })
-                .then(() => resolve());
-            }*/
-    })
+        })
   }
 
   remove(key: string) {
@@ -106,7 +84,7 @@ export class UsuarioProvider {
             case 7: { dados.key = "Química"; break; }
             case 8: { dados.key = "Sociologia"; break; }
             default: { dados.key = "Outro"; break; }
-          } 
+          }
         }
         encontradas.push({ dados });
       });

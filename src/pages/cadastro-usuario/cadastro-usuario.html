@@ -10,7 +10,7 @@
 
 <ion-content padding>
   <!-- src="{{this.photo}}" -->
-  <form [formGroup]="form">    
+  <form [formGroup]="form">
 
     <ion-label stacked>Selecione uma imagem:</ion-label>
     <ion-img width="110" height="110" src="{{ photo }}" style="text-align: left;" (click)="getFoto()"> </ion-img>
@@ -73,6 +73,11 @@
     <ion-item>
       <ion-datetime displayFormat="DD/MM/YYYY" formControlName="nasc" pickerFormat="DD MM YYYY"></ion-datetime>
     </ion-item>
+    <ion-item *ngIf="form.controls.nasc.value == undefined && form.controls.nasc.touched" color="danger">
+      <div [hidden]="!(form.controls.nasc.value == undefined && form.controls.nasc.touched)">
+        O campo é obrigatório
+      </div>
+    </ion-item>
 
     <ion-label>Sexo: </ion-label>
     <ion-list radio-group formControlName="sexo">
@@ -92,15 +97,16 @@
 
     <ion-label>CEP: </ion-label>
     <ion-input type="number" formControlName="cep" (blur)="verificarCEP()" minlength="8" maxlength="8"> </ion-input>
-    <ion-item *ngIf="(!form.controls.cep.valid || !valCEP) && (form.controls.cep.dirty || form.controls.cep.touched)" color="danger">
+    <ion-item *ngIf="(!form.controls.cep.valid || !valCEP) && (form.controls.cep.dirty || form.controls.cep.touched)"
+      color="danger">
       <div>
         CEP inválido!
       </div>
     </ion-item>
     <ion-item *ngIf="valCEP">
       <p>{{this.cep.logradouro}} <br>
-      Bairro: {{this.cep.bairro}} <br>
-      Cidade: {{this.cep.localidade}} &nbsp; UF: {{this.cep.uf}}</p>
+        Bairro: {{this.cep.bairro}} <br>
+        Cidade: {{this.cep.localidade}} &nbsp; UF: {{this.cep.uf}}</p>
     </ion-item>
 
 

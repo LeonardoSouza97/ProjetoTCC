@@ -4,6 +4,7 @@ import { BuscaProvider } from '../../providers/busca/busca';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
 import { PerfilPage } from '../perfil/perfil';
+import { Usuarios } from '../../models/Usuarios';
 
 /**
  * Generated class for the BuscaPage page.
@@ -23,7 +24,9 @@ export class BuscaPage {
   private busca: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController,
-    private formBuilder: FormBuilder, private provider: BuscaProvider, private bd: UsuarioProvider) {
+    private formBuilder: FormBuilder, private provider: BuscaProvider, private bd: UsuarioProvider,
+    private currrentUser: Usuarios) {
+
     this.busca = this.navParams.data.contact || {};
     this.createForm();
 
@@ -55,9 +58,8 @@ export class BuscaPage {
     this.bd.get(tutor.key).subscribe(async (data) => {
       var user: any;
       user = data;
-      this.navCtrl.push(PerfilPage, {user});
+      this.navCtrl.push(PerfilPage, { user });
     });
-
   }
 
 }

@@ -1,0 +1,78 @@
+<!--
+  Generated template for the SolicitacaoAulaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item>
+    <ion-label>{{this.tutor}}</ion-label>
+  </ion-item>
+  <br>
+
+  <form [formGroup]="form">
+    <ion-list>
+      <ion-item>
+        <ion-label>Matéria</ion-label>
+        <ion-select formControlName="materia" multiple="false" cancelText="Cancelar" okText="Ok">
+          <ion-option value="Biologia">Biologia</ion-option>
+          <ion-option value="Filosofia">Filosofia</ion-option>
+          <ion-option value="Fisica">Física</ion-option>
+          <ion-option value="Geografia">Geografia</ion-option>
+          <ion-option value="Historia">História</ion-option>
+          <ion-option value="Matematica">Matemática</ion-option>
+          <ion-option value="Portugues">Português</ion-option>
+          <ion-option value="Quimica">Química</ion-option>
+          <ion-option value="Sociologia">Sociologia</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="!form.controls.materia.valid && (form.controls.materia.dirty || form.controls.materia.touched)"
+        color="danger">
+        <div [hidden]="!form.controls.materia.errors.required">
+          O campo é obrigatório
+        </div>
+      </ion-item>
+      <br>
+
+      <ion-item>
+        <ion-label>Hora</ion-label>
+        <ion-datetime displayFormat="HH:mm" formControlName="hora" pickerFormat="HH mm" min="{{this.minT}}">
+        </ion-datetime>
+      </ion-item>
+      <ion-item *ngIf="form.controls.hora.value == undefined && form.controls.hora.touched" color="danger">
+        <div [hidden]="!(form.controls.hora.value == undefined && form.controls.hora.touched)">
+          O campo é obrigatório
+        </div>
+      </ion-item>
+      <br>
+
+      <ion-item>
+        <ion-label>Data</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" formControlName="dataA" pickerFormat="DD MM YYYY" min="{{this.minD}}"
+          max="{{this.maxD}}"></ion-datetime>
+      </ion-item>
+      <ion-item *ngIf="form.controls.dataA.value == undefined && form.controls.dataA.touched" color="danger">
+        <div [hidden]="!(form.controls.dataA.value == undefined && form.controls.dataA.touched)">
+          O campo é obrigatório
+        </div>
+      </ion-item>
+      <br>
+
+      <ion-item>
+        <ion-label>Descrição:</ion-label>
+        <ion-textarea formControlName="desc"></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <br>
+    <div padding style="text-align: center;">
+      <button ion-button class="btn" type="submit" (click)="onSubmit()" [disabled]="!form.valid">Salvar</button>
+    </div>
+  </form>
+
+
+</ion-content>

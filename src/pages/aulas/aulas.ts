@@ -14,6 +14,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'aulas.html',
 })
 export class AulasPage {
+  private barra: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

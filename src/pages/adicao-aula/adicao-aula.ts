@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
 import { Usuarios } from '../../models/Usuarios';
+import { PerfilPage } from '../perfil/perfil';
 
 /**
  * Generated class for the AdicaoAulaPage page.
@@ -50,17 +51,17 @@ export class AdicaoAulaPage {
     loading.present();
 
     /*Se der ruim comentar*/
-    var obsv = this.provider.get(this.form.controls.id.value).subscribe((data) => { //<--
+    /*var obsv = this.provider.get(this.form.controls.id.value).subscribe((data) => { //<--
       if (data.key != null) {//<--
         loading.dismiss();//<--
         return;//<--
       }//<--
       else {//<--
-        obsv.unsubscribe();//<--
+        obsv.unsubscribe();//<--*/
         this.provider.cadAulaUsuario(this.form, this.currentUser.id)
           .then(() => {
             loading.dismiss();
-            this.navCtrl.pop();
+            this.navCtrl.push(PerfilPage);
             this.toast.create({ message: 'Aula adicionada com sucesso!', duration: 3000 }).present();
           })
           .catch((e) => {
@@ -68,8 +69,8 @@ export class AdicaoAulaPage {
             this.toast.create({ message: 'Erro ao adicionar aula!', duration: 3000 }).present();
             console.error(e);
           });
-      }
-    });
+      //}
+    //});
   }
 
 }

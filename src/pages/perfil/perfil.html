@@ -10,7 +10,7 @@
 
 <ion-content padding>
   <ion-list-header>
-    <h2>Seu Perfil</h2>
+    <h2 [hidden]="this.profile != this.currrentUser">Seu Perfil</h2>
   </ion-list-header>
 
   <table>
@@ -58,7 +58,14 @@
     </button>
   </ion-fab>
 
-  <ion-fab right bottom [hidden]="this.profile == this.currrentUser"><!--Necessário adição do chat-->>
+  <ion-fab right bottom [hidden]="this.profile == this.currrentUser">
+    <!--Necessário adição do chat-->
+    <button ion-fab (click)="goSolicitarAula()">
+      <ion-icon name="book"></ion-icon>
+    </button>
+
+    <br>
+
     <button ion-fab>
       <ion-icon name="chatbubbles"></ion-icon>
     </button>

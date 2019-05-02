@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
 import { HttpClient } from '@angular/common/http';
+import { SolicitacaoAulaPage } from '../solicitacao-aula/solicitacao-aula';
 
 /**
  * Generated class for the PerfilPage page.
@@ -33,7 +34,7 @@ export class PerfilPage {
     loading.present()
 
     this.profile = navParams.get('user');
-  
+
     if (this.profile == undefined) {
       this.profile = currrentUser;
     }
@@ -53,11 +54,11 @@ export class PerfilPage {
       }
     });
 
-    if(this.profile == this.currrentUser){
+    if (this.profile == this.currrentUser) {
       provider.getAulasEnsinadas(this.profile.id).then(async (data) => {
         this.materias = data;
       });
-    }else{
+    } else {
       provider.getAulasEnsinadas(this.profile.key).then(async (data) => {
         this.materias = data;
       });
@@ -71,6 +72,10 @@ export class PerfilPage {
 
   goAdicaoAula() {
     this.navCtrl.push(AdicaoAulaPage);
+  }
+
+  goSolicitarAula() {
+    this.navCtrl.push(SolicitacaoAulaPage, { tutor: this.profile.key });
   }
 
 }

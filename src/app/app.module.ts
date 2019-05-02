@@ -9,7 +9,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 import { AdicaoAulaPage } from '../pages/adicao-aula/adicao-aula';
 import { AulasPage } from '../pages/aulas/aulas';
@@ -23,12 +23,14 @@ import { IntroPage } from '../pages/intro/intro';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CadastroUsuarioPage } from '../pages/cadastro-usuario/cadastro-usuario';
+import { SolicitacaoAulaPage } from '../pages/solicitacao-aula/solicitacao-aula';
 
 import { AES256 } from '@ionic-native/aes-256';
 import { ConfigProvider } from '../providers/config/config';
 import { UsuarioProvider } from '../providers/usuario/usuario';
 import { Camera } from '@ionic-native/camera';
 import { BuscaProvider } from '../providers/busca/busca';
+import { AulaProvider } from '../providers/aula/aula';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { BuscaProvider } from '../providers/busca/busca';
     PerfilPage,
     AgendaPage,
     AdicaoAulaPage,
+    SolicitacaoAulaPage,
     CadastroUsuarioPage,
   ],
   imports: [
@@ -71,19 +74,22 @@ import { BuscaProvider } from '../providers/busca/busca';
     PerfilPage,
     AgendaPage,
     AdicaoAulaPage,
+    SolicitacaoAulaPage,
     CadastroUsuarioPage,
   ],
   providers: [
     AES256,
+    Camera,
+    Usuarios,
     StatusBar,
     SplashScreen,
+    BuscaProvider,
     ConfigProvider,
-    Camera,
     UsuarioProvider,
     LoadingController,
-    Usuarios,
+    LocalNotifications,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    BuscaProvider,
+    AulaProvider,  
   ]
 })
 export class AppModule { }
