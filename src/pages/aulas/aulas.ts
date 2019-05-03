@@ -22,4 +22,13 @@ export class AulasPage {
   ionViewDidLoad() {
   }
 
+  showBar(barra: string) {
+    if (barra == "Solicitacao") {
+      this.barra = false;
+    }
+    else {
+      this.barra = true;
+    }
+    console.log(this.barra + "->" + barra)
+  }
 }

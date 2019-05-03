@@ -6,23 +6,33 @@
 -->
 <ion-header>
   <ion-toolbar>
-    <ion-segment color="primary">
-      <ion-segment-button value="Solicitacao">Solicitadas</ion-segment-button>
-      <ion-segment-button value="Pendente">Pendentes</ion-segment-button>
-      <ion-segment-button value="Ccncluidas">Concluidas</ion-segment-button>
-      <ion-segment-button value="Finalizadas">Finalizadas</ion-segment-button>
+    <ion-segment color="primary" [(ngModel)]="barraAula" (click)="showBar(barraAula)">
+      <ion-segment-button value="Solicitacao">Solicitações</ion-segment-button>
+      <ion-segment-button value="AulasMarcadas">Aulas Marcadas</ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 
+  <ion-toolbar [hidden]="barra == true">
+    <ion-segment color="primary">
+      <ion-segment-button value="Pendentes">Pendentes</ion-segment-button>
+      <ion-segment-button value="Confirmadas">Pendentes</ion-segment-button>
+      <ion-segment-button value="Recusadas">Recusadas</ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 
-  
+  <ion-toolbar [hidden]="barra == false">
+    <ion-segment color="primary">
+      <ion-segment-button value="NaoRealizadas">Não Realizadas</ion-segment-button>
+      <ion-segment-button value="Concluidas">Concluidas</ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 
 <ion-content padding>
-  <ion-refresher slot="fixed"> 
+ <!-- <ion-refresher slot="fixed"> 
     <ion-searchbar></ion-searchbar>
-  </ion-refresher>
+  </ion-refresher>-->
 
 
 </ion-content>
