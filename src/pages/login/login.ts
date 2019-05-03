@@ -72,24 +72,24 @@ export class LoginPage {
       user.id = data.key;
       this.currentUser.setCurrent(user);
 
-      this.aes256.decrypt(this.provider.secureKey, this.provider.secureIV, String(this.currentUser.senha).replace("/n", ""))
-        .then(res => {
-          if (user != undefined && res == this.form.controls.senha.value) { 
+      // this.aes256.decrypt(this.provider.secureKey, this.provider.secureIV, String(this.currentUser.senha).replace("/n", ""))
+      //   .then(res => {
+      //     if (user != undefined && res == this.form.controls.senha.value) { 
             loading.dismiss();
             this.navCtrl.push(TabsPage);
-          }
-          else {
-            loading.dismiss();
-            this.toast.create({ message: 'Login e/ou Senha errado(s)!', duration: 3000 }).present();
-            this.form.controls.id.setValue("");
-            this.form.controls.senha.setValue("");
-            this.usuario = undefined;
-          }
-        })
-        .catch((error: any) => {
-          loading.dismiss();
-          this.toast.create({ message: 'Login e/ou Senha errado(s)!', duration: 3000 }).present()
-        });
+        //   }
+        //   else {
+        //     loading.dismiss();
+        //     this.toast.create({ message: 'Login e/ou Senha errado(s)!', duration: 3000 }).present();
+        //     this.form.controls.id.setValue("");
+        //     this.form.controls.senha.setValue("");
+        //     this.usuario = undefined;
+        //   }
+        // })
+        // .catch((error: any) => {
+        //   loading.dismiss();
+        //   this.toast.create({ message: 'Login e/ou Senha errado(s)!', duration: 3000 }).present()
+        // });
     });
   }
 
