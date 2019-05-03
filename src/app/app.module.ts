@@ -1,4 +1,5 @@
 import { Usuarios } from '../models/Usuarios';
+import { Chat } from '../models/Chat';
 
 import { HttpClientModule } from '@angular/common/http';
 import { MyApp } from './app.component';
@@ -29,6 +30,7 @@ import { ConfigProvider } from '../providers/config/config';
 import { UsuarioProvider } from '../providers/usuario/usuario';
 import { Camera } from '@ionic-native/camera';
 import { BuscaProvider } from '../providers/busca/busca';
+import { PipesModule } from './../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { BuscaProvider } from '../providers/busca/busca';
     CadastroUsuarioPage,
   ],
   imports: [
+    // PipesModule,
     InputMaskModule,
     BrowserModule,
     IonicModule.forRoot(MyApp),
@@ -80,7 +83,7 @@ import { BuscaProvider } from '../providers/busca/busca';
     ConfigProvider,
     Camera,
     UsuarioProvider,
-    LoadingController,
+    LoadingController,    
     Usuarios,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     BuscaProvider,
