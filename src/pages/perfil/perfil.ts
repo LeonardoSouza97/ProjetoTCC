@@ -21,13 +21,12 @@ import { ChatService } from "../../app/app.service";
   selector: 'page-perfil',
   templateUrl: 'perfil.html',
 })
-export class PerfilPage {
-  private chatService: ChatService;
+export class PerfilPage {  
   private cep: any;
   private materias: Array<any> = new Array;
   private profile: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private provider: UsuarioProvider,
-    private currrentUser: Usuarios, public http: HttpClient, private loadingCtrl: LoadingController) {
+    private currrentUser: Usuarios, public http: HttpClient, private loadingCtrl: LoadingController, private chatService: ChatService) {
 
     const loading = this.loadingCtrl.create({
       spinner: 'dots',
@@ -78,8 +77,8 @@ export class PerfilPage {
   }
 
   goToChat(chatpartner) {
-    this.chatService.currentChatPairId = this.chatService.createPairId(this.currrentUser,chatpartner);
-    this.chatService.currentChatPartner = chatpartner;
+    this.chatService.currentChatPairId = this.chatService.createPairId(this.currrentUser.id,chatpartner.id);
+    this.chatService.currentChatPartner = chatpartner.id;
 
     this.navCtrl.push(ChatroomPage);
   }
