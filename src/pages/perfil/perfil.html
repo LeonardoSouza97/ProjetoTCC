@@ -59,8 +59,8 @@
   </ion-fab>
 
   <ion-fab right bottom [hidden]="this.profile == this.currrentUser" ><!--Necessário adição do chat-->>
-    <button ion-fab>
-      <ion-icon name="chatbubbles" (click)="goToChat(this.profile)" ></ion-icon>
+    <button ion-fab (click)="goToChat(this.profile)" >
+      <ion-icon name="chatbubbles" ></ion-icon>
     </button>
   </ion-fab>
 

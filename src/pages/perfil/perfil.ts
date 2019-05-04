@@ -78,10 +78,9 @@ export class PerfilPage {
   }
 
   goToChat(chatpartner) {
-    this.chatService.currentChatPairId = this.chatService.createPairId(
-      this.currrentUser,
-      chatpartner
-    );
+    this.chatService.currentChatPairId = this.chatService.createPairId(this.currrentUser,chatpartner);
+    this.chatService.currentChatPartner = chatpartner;
 
+    this.navCtrl.push(ChatroomPage);
   }
 }

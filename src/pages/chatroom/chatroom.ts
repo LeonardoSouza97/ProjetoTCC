@@ -72,7 +72,7 @@ export class ChatroomPage implements OnInit {
       console.log(this.message);
       this.chatPayload = {
         message: this.message,
-        sender: this.chatuser.email,
+        sender: this.chatuser.id,
         pair: this.chatService.currentChatPairId,
         time: new Date().getTime()
       };
@@ -93,6 +93,6 @@ export class ChatroomPage implements OnInit {
   } //addChat
 
   isChatPartner(senderEmail) {
-    return senderEmail == this.chatpartner.email;
+    return senderEmail == this.chatpartner.id;
   } //isChatPartner
 }
