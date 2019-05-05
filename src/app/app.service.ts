@@ -3,6 +3,7 @@ import {
   AngularFirestore,
   AngularFirestoreCollection
 } from "angularfire2/firestore";
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 import { Chat } from "../models/Chat";
 import { Usuarios} from "../models/Usuarios";
@@ -12,30 +13,28 @@ import { appconfig } from "../pages/chatroom/Chatconfig";
 @Injectable()
 export class ChatService { //service do chat 
 
-  users: AngularFirestoreCollection<Usuarios>;  
+  // users: AngularFirestoreCollection<Usuarios>;  
   private provider: UsuarioProvider;
-  chats: AngularFirestoreCollection<Chat>;
+  chats: AngularFireList<Chat>;
  
 
   //pair indica os dois users que esntao na call
   currentChatPairId;
   currentChatPartner;
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFireDatabase) {
     //Get the tasks collecction
     // this.users = db.collection<Usuarios>(appconfig.users_endpoint);
-    this.chats = db.collection<Chat>(appconfig.chats_endpoint);
+    this.chats = db.list<Chat>(appconfig.chats_endpoint);
   }
 
   addChat(chat: Chat) {
-    return this.chats.add(chat);
+    return this.chats.push(chat);
   } //addChat
 
   createPairId(user1, user2) {
     debugger
     console.log(user1);
-    // user1.time = 1;
-    // user2.time = 2;
     let pairId;
     if (user1.time < user2.time) {
       pairId = `${user1.id}|${user2.id}`;

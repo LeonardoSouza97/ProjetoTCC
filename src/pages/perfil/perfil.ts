@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
 import { HttpClient } from '@angular/common/http';
-import { Chat } from '../../models/Chat';
 import { ChatroomPage } from "../chatroom/chatroom";
 import { ChatService } from "../../app/app.service";
 
@@ -89,6 +88,6 @@ export class PerfilPage {
     this.chatService.currentChatPairId = this.chatService.createPairId(this.currrentUser,chatpartner);
     this.chatService.currentChatPartner = chatpartner;
 
-    this.navCtrl.push(ChatroomPage);
+    this.navCtrl.push("ChatroomPage");
   }
 }

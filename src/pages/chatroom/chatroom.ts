@@ -16,7 +16,7 @@ import { Storage } from "@ionic/storage";
 @IonicPage()
 @Component({
   selector: "page-chatroom",
-  templateUrl: "chatroom.html"
+  templateUrl: "chatroom.html",
 })
 export class ChatroomPage implements OnInit {
   chats: any = [];
@@ -54,8 +54,7 @@ export class ChatroomPage implements OnInit {
       this.chatuser = chatuser;
     });
 
-    this.db
-      .collection<Chat>(appconfig.chats_endpoint, res => {
+    this.db.collection<Chat>(appconfig.chats_endpoint, res => {
         return res.where("pair", "==", this.chatService.currentChatPairId);
       })
       .valueChanges()
