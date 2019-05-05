@@ -23,7 +23,7 @@ export class ChatService { //service do chat
 
   constructor(private db: AngularFirestore) {
     //Get the tasks collecction
-    this.users = db.collection<Usuarios>(appconfig.users_endpoint);
+    // this.users = db.collection<Usuarios>(appconfig.users_endpoint);
     this.chats = db.collection<Chat>(appconfig.chats_endpoint);
   }
 
@@ -32,6 +32,10 @@ export class ChatService { //service do chat
   } //addChat
 
   createPairId(user1, user2) {
+    debugger
+    console.log(user1);
+    // user1.time = 1;
+    // user2.time = 2;
     let pairId;
     if (user1.time < user2.time) {
       pairId = `${user1.id}|${user2.id}`;

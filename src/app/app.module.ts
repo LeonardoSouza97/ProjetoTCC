@@ -10,7 +10,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { AdicaoAulaPage } from '../pages/adicao-aula/adicao-aula';
 import { AulasPage } from '../pages/aulas/aulas';
@@ -31,6 +31,8 @@ import { UsuarioProvider } from '../providers/usuario/usuario';
 import { Camera } from '@ionic-native/camera';
 import { BuscaProvider } from '../providers/busca/busca';
 import { PipesModule } from './../pipes/pipes.module';
+import { ChatService } from './app.service';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,7 @@ import { PipesModule } from './../pipes/pipes.module';
     CadastroUsuarioPage,
   ],
   imports: [
-    // PipesModule,
+    PipesModule,
     InputMaskModule,
     BrowserModule,
     IonicModule.forRoot(MyApp),
@@ -59,8 +61,12 @@ import { PipesModule } from './../pipes/pipes.module';
       storageBucket: "projetotcc-6p5tt.appspot.com",
       messagingSenderId: "879423759668"
     }),
+    AngularFirestoreModule,
     AngularFireDatabaseModule,
     HttpClientModule,
+    IonicStorageModule.forRoot({
+      name: "__ionfirechat"
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -83,6 +89,7 @@ import { PipesModule } from './../pipes/pipes.module';
     ConfigProvider,
     Camera,
     UsuarioProvider,
+    ChatService,
     LoadingController,    
     Usuarios,
     { provide: ErrorHandler, useClass: IonicErrorHandler },

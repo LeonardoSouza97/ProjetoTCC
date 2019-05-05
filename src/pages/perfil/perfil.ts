@@ -24,7 +24,7 @@ import { ChatService } from "../../app/app.service";
 export class PerfilPage {  
   private cep: any;
   private materias: Array<any> = new Array;
-  private profile: any;
+  private profile: any;  
   constructor(public navCtrl: NavController, public navParams: NavParams, private provider: UsuarioProvider,
     private currrentUser: Usuarios, public http: HttpClient, private loadingCtrl: LoadingController, private chatService: ChatService) {
 
@@ -77,8 +77,17 @@ export class PerfilPage {
   }
 
   goToChat(chatpartner) {
-    this.chatService.currentChatPairId = this.chatService.createPairId(this.currrentUser.id,chatpartner.id);
-    this.chatService.currentChatPartner = chatpartner.id;
+    console.log(chatpartner)
+    console.log(this.currrentUser) 
+    
+    console.log(chatpartner.key)
+    chatpartner.id = chatpartner.key;
+    console.log(chatpartner)
+    this.currrentUser.id = 'teste';
+
+    debugger
+    this.chatService.currentChatPairId = this.chatService.createPairId(this.currrentUser,chatpartner);
+    this.chatService.currentChatPartner = chatpartner;
 
     this.navCtrl.push(ChatroomPage);
   }
