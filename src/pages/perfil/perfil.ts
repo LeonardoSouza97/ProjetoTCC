@@ -76,8 +76,6 @@ export class PerfilPage {
   }
 
   goToChat(chatpartner) {
-    console.log(chatpartner)
-    console.log(this.currrentUser) 
     
     console.log(chatpartner.key)
     chatpartner.id = chatpartner.key;

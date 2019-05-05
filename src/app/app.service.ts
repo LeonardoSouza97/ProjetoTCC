@@ -21,10 +21,11 @@ export class ChatService { //service do chat
   //pair indica os dois users que esntao na call
   currentChatPairId;
   currentChatPartner;
+  currentChatSender;
 
   constructor(private db: AngularFireDatabase) {
     //Get the tasks collecction
-    // this.users = db.collection<Usuarios>(appconfig.users_endpoint);
+    // this.users = db.collection<Usuarios>(appconfig.users_endpoint);    
     this.chats = db.list<Chat>(appconfig.chats_endpoint);
   }
 
@@ -34,6 +35,7 @@ export class ChatService { //service do chat
 
   createPairId(user1, user2) {
     debugger
+    this.currentChatSender = user1;
     console.log(user1);
     let pairId;
     if (user1.time < user2.time) {

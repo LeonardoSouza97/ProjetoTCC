@@ -5,6 +5,8 @@ import { Chat } from "../../models/Chat";
 import { appconfig } from "../../pages/chatroom/Chatconfig";
 import { ChatService } from "../../app/app.service";
 import { Storage } from "@ionic/storage";
+import { UsuarioProvider } from "../../providers/usuario/usuario";
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 /**
  * Generated class for the ChatroomPage page.
@@ -21,7 +23,7 @@ import { Storage } from "@ionic/storage";
 export class ChatroomPage implements OnInit {
   chats: any = [];
   chatpartner = this.chatService.currentChatPartner;
-  chatuser;
+  chatuser =this.chatService.currentChatSender;
   message: string;
   chatPayload: Chat;
   intervalScroll;
@@ -30,7 +32,7 @@ export class ChatroomPage implements OnInit {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private db: AngularFirestore,
+    private db: AngularFireDatabase,
     private chatService: ChatService,
     private storage: Storage
   ) {}
@@ -50,12 +52,8 @@ export class ChatroomPage implements OnInit {
   ngOnInit() {
     console.log(this.chatService.currentChatPairId);
 
-    this.storage.get("chatuser").then(chatuser => {
-      this.chatuser = chatuser;
-    });
-
-    this.db.collection<Chat>(appconfig.chats_endpoint, res => {
-        return res.where("pair", "==", this.chatService.currentChatPairId);
+    this.db.list<Chat>(appconfig.chats_endpoint, res => {
+        return res.equalTo("pair" + "==" + this.chatService.currentChatPairId);
       })
       .valueChanges()
       .subscribe(chats => {
@@ -68,7 +66,8 @@ export class ChatroomPage implements OnInit {
 
   addChat() {
     if (this.message && this.message !== "") {
-      console.log(this.message);
+      debugger
+      console.log(this.chats);
       this.chatPayload = {
         message: this.message,
         sender: this.chatuser.id,

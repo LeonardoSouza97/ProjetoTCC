@@ -50,7 +50,7 @@ export class UsuarioProvider {
         })
         .then(() => resolve())
         .catch((e) => reject(e));
-      /*      } else { Não mexer substituirá faz Insert
+      /*      } else { Não mexer substituirá faz Insert VOU MEXER SIM 
               this.db.list(this.PATH)
                 .push({
                   nome: usuarios.nome,

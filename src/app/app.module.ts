@@ -30,7 +30,7 @@ import { ConfigProvider } from '../providers/config/config';
 import { UsuarioProvider } from '../providers/usuario/usuario';
 import { Camera } from '@ionic-native/camera';
 import { BuscaProvider } from '../providers/busca/busca';
-import { PipeModule } from './../pipes/pipes.module';
+import { PipesModule } from './../pipes/pipes.module';
 import { ChatService } from './app.service';
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -49,7 +49,7 @@ import { IonicStorageModule } from '@ionic/storage';
     CadastroUsuarioPage,
   ],
   imports: [
-    PipeModule,
+    PipesModule,
     InputMaskModule,
     BrowserModule,
     IonicModule.forRoot(MyApp),
@@ -68,6 +68,7 @@ import { IonicStorageModule } from '@ionic/storage';
       name: "__ionfirechat"
     })
   ],
+  exports: [PipesModule],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
