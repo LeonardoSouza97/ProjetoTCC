@@ -7,6 +7,7 @@ import { UsuarioProvider } from '../../providers/usuario/usuario';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { CadastroUsuarioPage } from '../cadastro-usuario/cadastro-usuario';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular'
+import { RecuperarSenhaPage } from '../recuperar-senha/recuperar-senha';
 
 /**
  * Generated class for the LoginPage page.
@@ -45,7 +46,7 @@ export class LoginPage {
   }
 
   goToRecuperarSenha() {
-    // this.navCtrl.push()
+    this.navCtrl.push(RecuperarSenhaPage)
   }
 
   goToCadastroUsuario() {

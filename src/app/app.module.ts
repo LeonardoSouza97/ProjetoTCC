@@ -10,6 +10,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { EmailComposer } from '@ionic-native/email-composer';
 
 import { AdicaoAulaPage } from '../pages/adicao-aula/adicao-aula';
 import { AulasPage } from '../pages/aulas/aulas';
@@ -23,6 +24,7 @@ import { IntroPage } from '../pages/intro/intro';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CadastroUsuarioPage } from '../pages/cadastro-usuario/cadastro-usuario';
+import { RecuperarSenhaPage } from '../pages/recuperar-senha/recuperar-senha';
 
 import { AES256 } from '@ionic-native/aes-256';
 import { ConfigProvider } from '../providers/config/config';
@@ -42,6 +44,7 @@ import { BuscaProvider } from '../providers/busca/busca';
     PerfilPage,
     AgendaPage,
     AdicaoAulaPage,
+    RecuperarSenhaPage,
     CadastroUsuarioPage,
   ],
   imports: [
@@ -71,6 +74,7 @@ import { BuscaProvider } from '../providers/busca/busca';
     PerfilPage,
     AgendaPage,
     AdicaoAulaPage,
+    RecuperarSenhaPage,
     CadastroUsuarioPage,
   ],
   providers: [

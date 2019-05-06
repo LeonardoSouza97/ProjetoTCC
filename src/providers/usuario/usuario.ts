@@ -65,7 +65,18 @@ export class UsuarioProvider {
             }*/
     })
   }
+  updateSenha(senha : String,email : any){
+    return new Promise((resolve, reject) => {
+      //    if (usuarios.key) {
+      this.db.list("/usuarios/" + email)
+        .update(email, {
+          senha: senha,
+        })
+        .then(() => resolve())
+        .catch((e) => reject(e));
 
+    })
+  }
   remove(key: string) {
     return this.db.list(this.PATH).remove(key);
   }
