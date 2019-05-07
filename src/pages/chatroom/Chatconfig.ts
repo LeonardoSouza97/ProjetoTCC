@@ -9,6 +9,6 @@ export const appconfig = {
     },  
     //Indica onde buscar no bd
     users_endpoint: "/usuarios/",
-    chats_endpoint: "/chats/"
+    chats_endpoint: "chats"
   };
   
