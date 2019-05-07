@@ -68,20 +68,12 @@ export class RecuperarSenhaPage {
 
   }
   
-  /* 
-  enviaEmail(){
+  /*
+  enviaEmail(email,senha){
     let email = {
-      *   to: 'max@mustermann.de',
-      *   cc: 'erika@mustermann.de',
-      *   bcc: ['john@doe.com', 'jane@doe.com'],
-      *   attachments: [
-      *     'file://img/logo.png',
-      *     'res://icon.png',
-      *     'base64:icon.png//iVBORw0KGgoAAAANSUhEUg...',
-      *     'file://README.pdf'
-      *   ],
-      *   subject: 'Cordova Icons',
-      *   body: 'How are you? Nice greetings from Leipzig',
+      *   to: email.value,
+      *   subject: 'Recuperação de senha - EqualClass',
+      *   body: 'Olá, uma recuperação de senha foi solicitada para a sua conta, aqui está uma nova senha que poderá ser ultilizada:' + senha,
       *   isHtml: true
       * }
   }
