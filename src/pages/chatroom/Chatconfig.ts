@@ -8,7 +8,7 @@ export const appconfig = {
       messagingSenderId: "879423759668"
     },  
     //Indica onde buscar no bd
-    users_endpoint: "usuarios",
-    chats_endpoint: "chats"
+    users_endpoint: "/usuarios/",
+    chats_endpoint: "/chats/"
   };
   

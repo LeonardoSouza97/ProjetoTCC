@@ -7,6 +7,7 @@ import { ChatService } from "../../app/app.service";
 import { Storage } from "@ionic/storage";
 import { UsuarioProvider } from "../../providers/usuario/usuario";
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import firebase from "firebase";
 
 /**
  * Generated class for the ChatroomPage page.
@@ -53,8 +54,11 @@ export class ChatroomPage implements OnInit {
     console.log(this.chatService.currentChatPairId);
 
     this.db.list<Chat>(appconfig.chats_endpoint, res => {
-        return res.equalTo("pair" + "==" + this.chatService.currentChatPairId);
-      })
+      console.log(this.chatpartner);
+      debugger;
+      return res.orderByChild('pair').equalTo(this.chatService.currentChatPairId);
+        // return res.equalTo("pair" + "==" + this.chatService.currentChatPairId);
+      })      
       .valueChanges()
       .subscribe(chats => {
         //this.availableusers = users;

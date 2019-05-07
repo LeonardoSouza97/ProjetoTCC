@@ -13,6 +13,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { AdicaoAulaPage } from '../pages/adicao-aula/adicao-aula';
+import { ChatroomPage } from './../pages/chatroom/chatroom';
 import { AulasPage } from '../pages/aulas/aulas';
 import { AgendaPage } from '../pages/agenda/agenda';
 import { LoginPage } from '../pages/login/login';
@@ -78,7 +79,7 @@ import { IonicStorageModule } from '@ionic/storage';
     IntroPage,
     LoginPage,
     BuscaPage,
-    PerfilPage,
+    PerfilPage,    
     AgendaPage,
     AdicaoAulaPage,
     CadastroUsuarioPage,
