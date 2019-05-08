@@ -2,12 +2,11 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { AngularFirestore } from "angularfire2/firestore";
 import { Chat } from "../../models/Chat";
-import { appconfig } from "../../pages/chatroom/Chatconfig";
 import { ChatService } from "../../app/app.service";
 import { Storage } from "@ionic/storage";
-import { UsuarioProvider } from "../../providers/usuario/usuario";
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import firebase from "firebase";
+import { AngularFireDatabase} from 'angularfire2/database';
+import * as _ from "lodash";
+
 
 /**
  * Generated class for the ChatroomPage page.
@@ -22,7 +21,7 @@ import firebase from "firebase";
   templateUrl: "chatroom.html",
 })
 export class ChatroomPage implements OnInit {
-  chats: any = [];
+  chats: any[] = [];
   chatpartner = this.chatService.currentChatPartner;
   chatuser =this.chatService.currentChatSender;
   message: string;
@@ -51,22 +50,35 @@ export class ChatroomPage implements OnInit {
   
 
   ngOnInit() {
+    var chats: any[] = [];
     console.log(this.chatService.currentChatPairId);
+    // this.db.list<Chat>(appconfig.chats_endpoint, resp => {
+    //   console.log(this.chatpartner);
+    //   console.log(resp.orderByChild('pair'));
+    //   debugger;
+    //   // return resp.orderByChild('pair');
+    //   return resp.orderByChild('pair').equalTo(this.chatService.currentChatPairId);
+    //   })      
+    //   .valueChanges()      
+    //   .subscribe(chats => {
+    //     //this.availableusers = users;
+    //     console.log(chats);
+    //     this.chats = chats;
+    //     //console.log(this.content);
+    //   });
+    debugger;
+    return this.db.object('/chats' ).snapshotChanges().map(c => {
+      return { key: c.key, ...c.payload.val() };
+    }).subscribe(res => {     
 
-    this.db.list<Chat>(appconfig.chats_endpoint, res => {
-      console.log(this.chatpartner);
-      debugger;
-      return res.orderByChild('pair').equalTo(this.chatService.currentChatPairId);
-        // return res.equalTo("pair" + "==" + this.chatService.currentChatPairId);
-      })      
-      .valueChanges()
-      .subscribe(chats => {
-        //this.availableusers = users;
-        console.log(chats);
+      Object.keys(res).forEach(key => {
+        chats.push(new Object({ key, ...res[key] }));
+        console.log(this.chats);
         this.chats = chats;
-        //console.log(this.content);
       });
-  } //ngOnInit
+      this.chats = chats.slice(1);
+  }); 
+}//ngOnInit
 
   addChat() {
     if (this.message && this.message !== "") {
