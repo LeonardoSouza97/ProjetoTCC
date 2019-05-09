@@ -52,20 +52,6 @@ export class ChatroomPage implements OnInit {
   ngOnInit() {
     var chats: any[] = [];
     console.log(this.chatService.currentChatPairId);
-    // this.db.list<Chat>(appconfig.chats_endpoint, resp => {
-    //   console.log(this.chatpartner);
-    //   console.log(resp.orderByChild('pair'));
-    //   debugger;
-    //   // return resp.orderByChild('pair');
-    //   return resp.orderByChild('pair').equalTo(this.chatService.currentChatPairId);
-    //   })      
-    //   .valueChanges()      
-    //   .subscribe(chats => {
-    //     //this.availableusers = users;
-    //     console.log(chats);
-    //     this.chats = chats;
-    //     //console.log(this.content);
-    //   });
     debugger;
     return this.db.object('/chats' ).snapshotChanges().map(c => {
       return { key: c.key, ...c.payload.val() };
