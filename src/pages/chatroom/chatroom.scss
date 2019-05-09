@@ -5,16 +5,19 @@ page-chatroom {
   display: flex;
   flex-direction: row;
   .chat {
-    background-color: pink;
+    background-color: purple;
     border: none;
     width: 90%;
     margin-bottom: 20px;
     border-radius: 5px;
     align-self: flex-end;
+    margin-left: 10%;    
   }
 
   .chat-partner {
-    margin-left: 10%;
-    background-color: skyblue;
+    margin-left: 0%;
+    margin-right: 10%;
+    width: 90%;    
+    background-color: grey;
   }
 }
