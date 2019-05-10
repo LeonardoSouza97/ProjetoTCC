@@ -1,3 +1,4 @@
+import { SplashScreen } from '@ionic-native/splash-screen';
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { AngularFirestore } from "angularfire2/firestore";
@@ -6,6 +7,7 @@ import { ChatService } from "../../app/app.service";
 import { Storage } from "@ionic/storage";
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as _ from "lodash";
+import { pairs } from 'rxjs/observable/pairs';
 
 
 /**
@@ -21,9 +23,12 @@ import * as _ from "lodash";
   templateUrl: "chatroom.html",
 })
 export class ChatroomPage implements OnInit {
+  
   chats: any[] = [];
+  filtros = {};
   chatpartner = this.chatService.currentChatPartner;
   chatuser = this.chatService.currentChatSender;
+  pair = this.chatService.currentChatPairId;
   message: string;
   chatPayload: Chat;
   intervalScroll;
@@ -33,8 +38,7 @@ export class ChatroomPage implements OnInit {
     public navCtrl: NavController,
     public navParams: NavParams,
     private db: AngularFireDatabase,
-    private chatService: ChatService,
-    private storage: Storage
+    private chatService: ChatService
   ) { }
 
   ionViewDidLoad() {
@@ -64,14 +68,16 @@ export class ChatroomPage implements OnInit {
     });
   }//ngOnInit
 
-  filtrachat(chatsToFilter) {
-    chatsToFilter = _.filter(chatsToFilter, _.conforms(this.chatService.currentChatPairId));
+  filtrachat(chatsToFilter) { 
+    this.filtros["pair"] = val => val == this.pair;   
+    chatsToFilter = _.filter(chatsToFilter, _.conforms(this.filtros));
     console.log(chatsToFilter);
     return chatsToFilter;
   }
 
   addChat() {
-    if (this.message && this.message !== "") {      
+    if (this.message && this.message !== "") {  
+      debugger;    
       console.log(this.chats);
       this.chatPayload = {
         message: this.message,

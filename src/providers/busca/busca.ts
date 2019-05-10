@@ -31,7 +31,6 @@ export class BuscaProvider {
 
   getMateria(materia: string) {
     var tutores: Array<any> = new Array;
-    debugger;
     return this.db.object('/aulas/' + materia + '/').snapshotChanges().map(c => {
       return { key: c.key, ...c.payload.val() };
     }).subscribe(async res => {
