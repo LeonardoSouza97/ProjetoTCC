@@ -23,7 +23,7 @@ import { pairs } from 'rxjs/observable/pairs';
   templateUrl: "chatroom.html",
 })
 export class ChatroomPage implements OnInit {
-  
+
   chats: any[] = [];
   filtros = {};
   chatpartner = this.chatService.currentChatPartner;
@@ -55,31 +55,45 @@ export class ChatroomPage implements OnInit {
 
   ngOnInit() {
     var chats: any[] = [];
-    console.log(this.chatService.currentChatPairId);
-    debugger;
+    // console.log(this.chatService.currentChatPairId);
     return this.db.object('/chats').snapshotChanges().map(c => {
       return { key: c.key, ...c.payload.val() };
     }).subscribe(res => {
       Object.keys(res).forEach(key => {
-        chats.push(new Object({ key, ...res[key] }));
-        console.log(this.chats);
+        var msg = new Object({ key, ...res[key] });
+
+        if (!this.veficaSeAMensagemJaExiste(msg, chats)) {
+          chats.push(msg);
+        };
+        
         this.chats = this.filtrachat(chats);
       });
     });
   }//ngOnInit
 
-  filtrachat(chatsToFilter) { 
-    this.filtros["pair"] = val => val == this.pair;   
+  veficaSeAMensagemJaExiste(msg, list) {
+    var tempoDaMensagem = msg.time;
+    for (let obj of list) {
+      if (tempoDaMensagem === obj.time) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  filtrachat(chatsToFilter) {
+    this.filtros["pair"] = val => val == this.pair;
     chatsToFilter = _.filter(chatsToFilter, _.conforms(this.filtros));
-    console.log(chatsToFilter);
+    // console.log(chatsToFilter);
     return chatsToFilter;
   }
 
   addChat() {
-    if (this.message && this.message !== "") {  
-      debugger;    
+    
+    if (this.message && this.message !== "") {
+      debugger;
       console.log(this.chats);
-      this.chatPayload = {
+      var chatPayload = {
         message: this.message,
         sender: this.chatuser.id,
         pair: this.chatService.currentChatPairId,
@@ -87,7 +101,7 @@ export class ChatroomPage implements OnInit {
       };
 
       this.chatService
-        .addChat(this.chatPayload)
+        .addChat(chatPayload)
         .then(() => {
           //Clear message box
           this.message = "";
