@@ -34,11 +34,10 @@ export class ChatService { //service do chat
   } //addChat
 
   createPairId(user1, user2) {
-    debugger
     this.currentChatSender = user1;
     console.log(user1);
     let pairId;
-    if (user1.time < user2.time) {
+    if (user1.cpf < user2.cpf) {
       pairId = `${user1.id}|${user2.id}`;
     } else {
       pairId = `${user2.id}|${user1.id}`;

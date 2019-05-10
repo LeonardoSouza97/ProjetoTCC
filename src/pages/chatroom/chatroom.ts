@@ -4,7 +4,7 @@ import { AngularFirestore } from "angularfire2/firestore";
 import { Chat } from "../../models/Chat";
 import { ChatService } from "../../app/app.service";
 import { Storage } from "@ionic/storage";
-import { AngularFireDatabase} from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import * as _ from "lodash";
 
 
@@ -23,7 +23,7 @@ import * as _ from "lodash";
 export class ChatroomPage implements OnInit {
   chats: any[] = [];
   chatpartner = this.chatService.currentChatPartner;
-  chatuser =this.chatService.currentChatSender;
+  chatuser = this.chatService.currentChatSender;
   message: string;
   chatPayload: Chat;
   intervalScroll;
@@ -35,7 +35,7 @@ export class ChatroomPage implements OnInit {
     private db: AngularFireDatabase,
     private chatService: ChatService,
     private storage: Storage
-  ) {}
+  ) { }
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad ChatroomPage");
@@ -46,29 +46,32 @@ export class ChatroomPage implements OnInit {
     this.content.scrollToBottom(300); //300ms animation speed
   }
 
-  ionViewWillLeave() {}
-  
+  ionViewWillLeave() { }
+
 
   ngOnInit() {
     var chats: any[] = [];
     console.log(this.chatService.currentChatPairId);
     debugger;
-    return this.db.object('/chats' ).snapshotChanges().map(c => {
+    return this.db.object('/chats').snapshotChanges().map(c => {
       return { key: c.key, ...c.payload.val() };
-    }).subscribe(res => {     
-
+    }).subscribe(res => {
       Object.keys(res).forEach(key => {
         chats.push(new Object({ key, ...res[key] }));
         console.log(this.chats);
-        this.chats = chats;
+        this.chats = this.filtrachat(chats);
       });
-      this.chats = chats.slice(1);
-  }); 
-}//ngOnInit
+    });
+  }//ngOnInit
+
+  filtrachat(chatsToFilter) {
+    chatsToFilter = _.filter(chatsToFilter, _.conforms(this.chatService.currentChatPairId));
+    console.log(chatsToFilter);
+    return chatsToFilter;
+  }
 
   addChat() {
-    if (this.message && this.message !== "") {
-      debugger
+    if (this.message && this.message !== "") {      
       console.log(this.chats);
       this.chatPayload = {
         message: this.message,
@@ -91,7 +94,7 @@ export class ChatroomPage implements OnInit {
         });
     }
   } //addChat
-  
+
   isChatPartner(senderEmail) {
     return senderEmail == this.chatpartner.id;
   } //isChatPartner

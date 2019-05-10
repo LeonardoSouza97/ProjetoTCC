@@ -75,14 +75,10 @@ export class PerfilPage {
     this.navCtrl.push(AdicaoAulaPage);
   }
 
-  goToChat(chatpartner) {
-    
-    console.log(chatpartner.key)
+  goToChat(chatpartner) {    
     chatpartner.id = chatpartner.key;
-    console.log(chatpartner)
-    this.currrentUser.id = 'teste';
-
-    debugger
+    console.log(this.currrentUser.id);
+        
     this.chatService.currentChatPairId = this.chatService.createPairId(this.currrentUser,chatpartner);
     this.chatService.currentChatPartner = chatpartner;
 
